@@ -7,7 +7,6 @@ const User = require("../models/User");
 const { uploadFileToCloudinary } = require("../utils/fileUploader");
 const { default: mongoose } = require("mongoose");
 const { convertSecondsToDuration } = require("../utils/secondToDuration");
-const { useId } = require("react");
 // Function to create a new course
 exports.createCourse = async (req, res) => {
   try {
