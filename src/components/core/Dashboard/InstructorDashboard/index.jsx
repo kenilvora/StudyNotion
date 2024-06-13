@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../../../common/Spinner";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { apiConnector } from "../../../../services/apiConnector";
-import { profileEndpoints } from "../../../../services/apis";
 import { fetchInstructorCourses } from "../../../../services/operations/courseDetailsAPI";
 import { getInstructorData } from "../../../../services/operations/profileAPI";
 import HighlightText from "../../HomePage/HighlightText";

@@ -16,11 +16,8 @@ const PublishCourse = () => {
   const {
     register,
     setValue,
-    getValues,
     handleSubmit,
-    reset,
-    clearErrors,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();

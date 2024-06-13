@@ -7,7 +7,6 @@ import Spinner from "../../common/Spinner";
 import ReactPlayer from "react-player/lazy";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa6";
-import toast from "react-hot-toast";
 
 const VideoDetails = () => {
   const { courseId, sectionId, subSectionId } = useParams();

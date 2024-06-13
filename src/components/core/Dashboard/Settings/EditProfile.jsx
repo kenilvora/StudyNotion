@@ -13,7 +13,7 @@ const EditProfile = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       countryCode:

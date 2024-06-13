@@ -3,10 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
   Pagination,
-  FreeMode,
   Autoplay,
-  Scrollbar,
-  A11y,
 } from "swiper/modules";
 
 // Import Swiper styles

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { buyCourse } from "../services/operations/paymentAPI";
 import toast from "react-hot-toast";
-import { apiConnector } from "../services/apiConnector";
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI";
 import Spinner from "../components/common/Spinner";
 import GetAvgRating from "../utils/avgRatings";

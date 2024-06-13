@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactStars from "react-rating-stars-component";
 import { BiSolidTrash } from "react-icons/bi";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { removeFromCart } from "../../../slices/cartSlice";
 import RatingStars from "../../common/RatingStars";
 import { buyCourse } from "../../../services/operations/paymentAPI";

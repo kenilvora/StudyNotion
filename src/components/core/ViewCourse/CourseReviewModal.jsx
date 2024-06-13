@@ -21,11 +21,8 @@ const CourseReviewModal = ({ setReviewModal }) => {
   const {
     register,
     setValue,
-    getValues,
     handleSubmit,
-    reset,
-    clearErrors,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   useEffect(() => {

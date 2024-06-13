@@ -5,7 +5,6 @@ import { GiArrowCursor } from "react-icons/gi";
 import { MdOutlineMobileFriendly, MdOutlineWatchLater } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { buyCourse } from "../../../services/operations/paymentAPI";
 import { addToCart } from "../../../slices/cartSlice";
 import toast from "react-hot-toast";
 import copy from "copy-to-clipboard";

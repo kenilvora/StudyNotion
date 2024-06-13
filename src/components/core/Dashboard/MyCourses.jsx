@@ -30,12 +30,7 @@ const MyCourses = () => {
   const {
     register,
     setValue,
-    getValues,
-    handleSubmit,
-    reset,
-    clearErrors,
     watch,
-    formState: { errors, isSubmitSuccessful },
   } = useForm();
 
   const checkBox = watch("deleteAllCourse");

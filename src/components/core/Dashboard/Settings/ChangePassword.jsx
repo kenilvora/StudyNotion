@@ -16,7 +16,7 @@ const ChangePassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();

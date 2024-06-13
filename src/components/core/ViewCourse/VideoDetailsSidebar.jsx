@@ -4,7 +4,6 @@ import {
   useLocation,
   useNavigate,
   useParams,
-  useSearchParams,
 } from "react-router-dom";
 import Error from "../../../pages/Error";
 import {

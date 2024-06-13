@@ -27,7 +27,7 @@ const CourseContentView = ({ section, isActive, setIsActive }) => {
 
   useEffect(() => {
     let totalTime = 0;
-    section?.subSection.map((subSec) => {
+    section?.subSection.forEach((subSec) => {
       totalTime += parseInt(subSec.timeDuration);
     });
 

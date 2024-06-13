@@ -20,11 +20,8 @@ const CourseBuilderForm = () => {
   const {
     register,
     setValue,
-    getValues,
     handleSubmit,
-    reset,
-    clearErrors,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const { course } = useSelector((state) => state.course);

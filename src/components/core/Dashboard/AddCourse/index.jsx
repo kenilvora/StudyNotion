@@ -1,12 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import RenderSteps from "./RenderSteps";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { resetCourseState } from "../../../../slices/courseSlice";
 
 export default function AddCourse() {
-  const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {

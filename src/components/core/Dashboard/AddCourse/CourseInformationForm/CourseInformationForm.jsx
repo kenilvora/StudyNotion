@@ -14,7 +14,6 @@ import CourseInstructionInput from "./CourseInstructionInput";
 import { FaAngleRight } from "react-icons/fa6";
 import {
   setCourse,
-  setEditCourse,
   setStep,
 } from "../../../../../slices/courseSlice";
 import toast from "react-hot-toast";
@@ -28,7 +27,7 @@ const CourseInformationForm = () => {
     handleSubmit,
     reset,
     clearErrors,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();

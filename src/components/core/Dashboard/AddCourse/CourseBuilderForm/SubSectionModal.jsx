@@ -23,9 +23,8 @@ const SubSectionModal = ({
     setValue,
     getValues,
     handleSubmit,
-    reset,
     clearErrors,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();

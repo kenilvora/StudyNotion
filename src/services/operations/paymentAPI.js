@@ -2,8 +2,6 @@ import toast from "react-hot-toast";
 import { studentEndpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
 import rzpLogo from "../../assets/Logo/rzp_logo.png";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setPaymentLoading } from "../../slices/courseSlice";
 import { resetCart } from "../../slices/cartSlice";
 
