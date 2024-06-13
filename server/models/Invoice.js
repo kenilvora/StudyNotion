@@ -66,14 +66,10 @@ const invoiceSchema = new mongoose.Schema({
 
 async function sendEmail(email, data) {
   try {
-    console.log("Data -> ", data);
-    const pdfBuffer = await generateInvoicePDF(data);
-
-    const mailResponse = await mailSenderWithAttachment(
+    const mailResponse = await mailSender(
       email,
       "Course Registration Successfully",
       courseEnrollmentEmail(data.courses, data.userName),
-      pdfBuffer
     );
 
     await mailSender(
