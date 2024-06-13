@@ -91,7 +91,7 @@ exports.paymentSuccessfullEmail = (name, paymentId, orderId, amount) => {
                     <p>Your Payment Id: <span class="highlight">${paymentId}</span></p>
                     <p>Your Order Id: <span class="highlight">${orderId}</span> </p>
                     <p>You can now access your course and start your learning journey right away!</p>
-                    <a href="http://localhost:3000/dashboard/enrolled-courses" class="button">Access Your Course</a>
+                    <a href="https://studynotion-frontend-one-brown.vercel.app//dashboard/enrolled-courses" class="button">Access Your Course</a>
                     <p>If you have any questions or need further assistance, please feel free to reach out to us at any time.</p>
                     <p>Thank you for choosing <span class="highlight">StudyNotion</span>. We are excited to have you with us and wish you the best of luck in your studies!</p>
                     <p>Best regards,</p>

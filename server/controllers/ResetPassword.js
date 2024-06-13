@@ -63,7 +63,7 @@ exports.resetPasswordToken = async (req, res) => {
         console.log("DETAILS ", updatedUser);
 
         // create Url
-        const url = `http://localhost:3000/reset-password/${token}`;
+        const url = `https://studynotion-frontend-one-brown.vercel.app//reset-password/${token}`;
         // send mail containing the url
         try {
           const name = `${updatedUser.firstName} ${updatedUser.lastName}`;
