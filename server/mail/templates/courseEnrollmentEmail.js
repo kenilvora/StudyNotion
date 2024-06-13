@@ -80,7 +80,7 @@ exports.courseEnrollmentEmail = (courses, name) => {
                   <p>Please log in to your learning dashboard to access the course materials and start your learning journey.
                   </p>
                   <p>We have attached your payment invoice for your reference.</p>
-                  <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">Go to Dashboard</a>
+                  <a class="cta" href="https://studynotion-frontend-one-brown.vercel.app/dashboard/enrolled-courses">Go to Dashboard</a>
               </div>
               <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
                   href="mailto:studynotion111@gmail.com">studynotion111@gmail.com</a>. We are here to help!
