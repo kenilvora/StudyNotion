@@ -3,7 +3,6 @@ import { setLoading, setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
-import Cookies from "js-cookie";
 
 const {
   SENDOTP_API,
@@ -112,18 +111,6 @@ export function login(email, password, navigate) {
         "user",
         JSON.stringify({ ...response.data.user, image: userImage })
       );
-      Cookies.set("token", JSON.stringify(response.data.token), {
-        expires: 1,
-        path: "/",
-        secure: true,
-        sameSite: "Strict",
-      });
-      Cookies.set("user", JSON.stringify(response.data.user), {
-        expires: 1,
-        path: "/",
-        secure: true,
-        sameSite: "Strict",
-      });
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);

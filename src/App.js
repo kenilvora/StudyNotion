@@ -23,7 +23,6 @@ import Cart from "./components/core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse/index";
-import Cookies from "js-cookie";
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
