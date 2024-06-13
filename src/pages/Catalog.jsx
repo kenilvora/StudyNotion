@@ -71,13 +71,13 @@ const Catalog = () => {
           {/* Section 1 */}
           <div className="bg-richblack-800">
             <div className="text-richblack-5 py-14 flex flex-col justify-center gap-3 w-11/12 max-w-maxContent mx-auto">
-              <div className="flex gap-1 items-center text-richblack-300 text-lg font-bold">
+              <div className="flex gap-1 items-center text-richblack-300 text-lg max-[400px]:text-base font-bold">
                 Home / Dashboard /{" "}
                 <span className="text-yellow-100 font-bold capitalize">
                   {catalogName}
                 </span>
               </div>
-              <div className="flex text-4xl font-bold capitalize">
+              <div className="flex text-4xl max-[400px]:text-2xl font-bold capitalize">
                 {catalogName}
               </div>
               <div className="text-richblack-300">

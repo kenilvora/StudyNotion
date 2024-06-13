@@ -39,6 +39,8 @@ const Navbar = () => {
     }
   };
 
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -62,14 +64,20 @@ const Navbar = () => {
               <IoMenu className="text-3xl hover:cursor-pointer max-[350px]:text-2xl"></IoMenu>
             )}
             {isMenuOpen && (
-              <nav className="flex flex-col gap-3 text-lg text-richblack-900 z-50 py-4 absolute bg-richblack-5 rounded-md top-14 font-edu-sa max-[380px]:text-[0.9rem] max-[380px]:leading-4">
+              <nav className="flex flex-col gap-3 text-lg text-richblack-900 z-50 py-4 absolute bg-richblack-5 rounded-md top-14  max-[380px]:text-[0.9rem] max-[380px]:leading-4">
                 {NavbarLinks.map((navLink, index) => {
                   return navLink.title === "Catalog" ? (
                     <div
                       key={index}
                       className="group px-4 hover:text-yellow-700 hover:cursor-pointer hover:font-bold flex select-none relative"
                     >
-                      <div className={`flex gap-2 items-center`}>
+                      <div
+                        className={`flex gap-2 items-center`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setIsCatalogOpen(!isCatalogOpen);
+                        }}
+                      >
                         <GrCatalogOption></GrCatalogOption>
                         <p className="flex gap-1 items-center">
                           {navLink.title}
@@ -77,9 +85,14 @@ const Navbar = () => {
                         </p>
                       </div>
 
-                      <div className="hidden group-hover:block z-50 absolute">
+                      <div
+                        className={`hidden z-50 absolute
+                          ${isCatalogOpen ? "block" : "hidden"}
+                          group-hover:block
+                      `}
+                      >
                         <div className="w-[2rem] h-[2rem] max-[380px]:w-[1.5rem] max-[380px]:h-[1.5rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[8.8rem] -top-0.5 max-[380px]:left-[7.3rem] max-[380px]:-top-1"></div>
-                        <div className="flex flex-col py-2 px-2 bg-richblack-25 font-edu-sa absolute rounded-md left-[9.73rem] -top-14 max-[380px]:left-[7.9rem] max-[380px]:-top-[2.75rem] w-56 max-[440px]:w-40 max-[340px]:w-36">
+                        <div className="flex flex-col py-2 px-2 bg-richblack-25  absolute rounded-md left-[9.73rem] -top-14 max-[380px]:left-[7.9rem] max-[380px]:-top-[2.75rem] w-56 max-[440px]:w-40 max-[340px]:w-36">
                           {categoryLinks.map((category, index) => {
                             return (
                               <NavLink
@@ -147,7 +160,7 @@ const Navbar = () => {
 
                 <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 absolute top-10 transition-all duration-200">
                   <div className="w-[2rem] h-[2rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[3.39rem] top-2"></div>
-                  <div className="flex flex-col py-3 px-2 bg-richblack-25 text-md font-edu-sa w-72 absolute top-4 rounded-md -left-32">
+                  <div className="flex flex-col py-3 px-2 bg-richblack-25 text-md w-72 absolute top-4 rounded-md -left-32">
                     {categoryLinks.map((category, index) => {
                       return (
                         <NavLink
