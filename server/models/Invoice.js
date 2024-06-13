@@ -81,7 +81,6 @@ async function sendEmail(email, data) {
         data.contactNumber,
         data.courses,
         data.totalPrice,
-        data.invoiceNumber,
         data.date
       )
     );

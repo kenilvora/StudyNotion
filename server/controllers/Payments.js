@@ -9,6 +9,12 @@ const { mailSender } = require("../utils/mailSender");
 const {
   paymentSuccessfullEmail,
 } = require("../mail/templates/paymentSuccessfullEmail");
+const {
+  courseEnrollmentEmail,
+} = require("../mail/templates/courseEnrollmentEmail");
+const {
+  adminPaymentRecieved,
+} = require("../mail/templates/adminPaymentRecieved");
 require("dotenv").config();
 
 // For Multiple Course Purchase Only
@@ -230,33 +236,64 @@ const enrollStudent = async (courses, userId, res) => {
       }
     }
 
-    function generateUniqueInvoiceNumber() {
-      // Generate a random string
-      const randomString = crypto.randomBytes(16).toString("hex").toUpperCase();
+    let courses = courseData;
+    let userName = `${firstName} ${lastName}`;
 
-      // Format the current date as YYYYMMDD
-      const today = new Date();
-      const dateComponent = `${today.getFullYear()}${(today.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}${today.getDate().toString().padStart(2, "0")}`;
+    try {
+      await mailSender(
+        email,
+        "Course Registration Successfully",
+        courseEnrollmentEmail(courses, userName)
+      );
 
-      // Combine random string and date component to form the invoice number
-      const invoiceNumber = `INV-${dateComponent}-${randomString}`;
+      await mailSender(
+        process.env.ADMIN_MAIL_ID,
+        "Payment Received Successfully",
+        adminPaymentRecieved(
+          userName,
+          email,
+          contactNumber,
+          courses,
+          totalAmount,
+          Date.now()
+        )
+      );
 
-      return invoiceNumber;
+      console.log("Email sent successfully, ", mailResponse);
+    } catch (error) {
+      console.log(
+        "Error occurred while sending Course Registration mail ",
+        error
+      );
     }
 
-    const invoiceData = new Invoice({
-      invoiceNumber: generateUniqueInvoiceNumber(),
-      email: email,
-      userId: id,
-      userName: `${firstName} ${lastName}`,
-      courses: courseData,
-      contactNumber: contactNumber,
-      totalPrice: totalAmount,
-    });
+    // function generateUniqueInvoiceNumber() {
+    //   // Generate a random string
+    //   const randomString = crypto.randomBytes(16).toString("hex").toUpperCase();
 
-    await invoiceData.save();
+    //   // Format the current date as YYYYMMDD
+    //   const today = new Date();
+    //   const dateComponent = `${today.getFullYear()}${(today.getMonth() + 1)
+    //     .toString()
+    //     .padStart(2, "0")}${today.getDate().toString().padStart(2, "0")}`;
+
+    //   // Combine random string and date component to form the invoice number
+    //   const invoiceNumber = `INV-${dateComponent}-${randomString}`;
+
+    //   return invoiceNumber;
+    // }
+
+    // const invoiceData = new Invoice({
+    //   invoiceNumber: generateUniqueInvoiceNumber(),
+    //   email: email,
+    //   userId: id,
+    //   userName: `${firstName} ${lastName}`,
+    //   courses: courseData,
+    //   contactNumber: contactNumber,
+    //   totalPrice: totalAmount,
+    // });
+
+    // await invoiceData.save();
   } catch (error) {
     console.log(error);
     return res.status(500).json({

@@ -4,7 +4,6 @@ exports.adminPaymentRecieved = (
   contactNumber,
   courses,
   totalAmount,
-  invoiceNumber,
   paymentDate
 ) => {
   return `
@@ -82,7 +81,6 @@ exports.adminPaymentRecieved = (
                              .join("")}
                         </ul>
                         <p><strong>Total Amount Received:</strong> ₹${totalAmount}</p>
-                        <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
                         <p><strong>Payment Date:</strong> ${paymentDate}</p>
                     </div>
                     <p>Thank you for your continued support.</p>
