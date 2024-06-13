@@ -236,14 +236,13 @@ const enrollStudent = async (courses, userId, res) => {
       }
     }
 
-    let courses = courseData;
     let userName = `${firstName} ${lastName}`;
 
     try {
       await mailSender(
         email,
         "Course Registration Successfully",
-        courseEnrollmentEmail(courses, userName)
+        courseEnrollmentEmail(courseData, userName)
       );
 
       await mailSender(
@@ -253,7 +252,7 @@ const enrollStudent = async (courses, userId, res) => {
           userName,
           email,
           contactNumber,
-          courses,
+          courseData,
           totalAmount,
           Date.now()
         )
@@ -266,34 +265,7 @@ const enrollStudent = async (courses, userId, res) => {
         error
       );
     }
-
-    // function generateUniqueInvoiceNumber() {
-    //   // Generate a random string
-    //   const randomString = crypto.randomBytes(16).toString("hex").toUpperCase();
-
-    //   // Format the current date as YYYYMMDD
-    //   const today = new Date();
-    //   const dateComponent = `${today.getFullYear()}${(today.getMonth() + 1)
-    //     .toString()
-    //     .padStart(2, "0")}${today.getDate().toString().padStart(2, "0")}`;
-
-    //   // Combine random string and date component to form the invoice number
-    //   const invoiceNumber = `INV-${dateComponent}-${randomString}`;
-
-    //   return invoiceNumber;
-    // }
-
-    // const invoiceData = new Invoice({
-    //   invoiceNumber: generateUniqueInvoiceNumber(),
-    //   email: email,
-    //   userId: id,
-    //   userName: `${firstName} ${lastName}`,
-    //   courses: courseData,
-    //   contactNumber: contactNumber,
-    //   totalPrice: totalAmount,
-    // });
-
-    // await invoiceData.save();
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -343,222 +315,3 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
     });
   }
 };
-
-// For Single Course Purchase Only
-// // capture the payment and initiate the Razorpay order
-// exports.capturePayment = async (req, res) => {
-//   try {
-//     // fetch data
-//     const { courseId } = req.body;
-//     const userId = req.user.id;
-
-//     // validation
-//     if (!courseId) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Please provide valid CourseID",
-//       });
-//     }
-
-//     let course;
-//     try {
-//       // check if course exist or not
-//       course = await Course.findById(courseId);
-
-//       if (!course) {
-//         return res.status(404).json({
-//           success: false,
-//           message: "Course Not Found",
-//         });
-//       }
-
-//       // check if user already buy this course or not
-//       const uid = new mongoose.Types.ObjectId.createFromHexString(userId);
-//       if (course.studentsEnrolled.includes(uid)) {
-//         return res.status(200).json({
-//           success: false,
-//           message: "Student is already enrolled",
-//         });
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       return res.status(500).json({
-//         success: false,
-//         message: error.message,
-//       });
-//     }
-
-//     // create order
-//     const amount = course.price;
-//     const currency = "INR";
-
-//     const options = {
-//       amount: amount * 100,
-//       currency: currency,
-//       receipt: Date.now() + Math.floor(Math.random() * 10000).toString(),
-//       notes: {
-//         courseId: courseId,
-//         userId: userId,
-//       },
-//     };
-
-//     try {
-//       // initiate the payment using razorpay
-//       const paymentResponse = await instance.orders.create(options);
-//       console.log(paymentResponse);
-
-//       // return response
-//       return res.status(200).json({
-//         success: true,
-//         courseName: course.courseName,
-//         courseDescription: course.courseDescription,
-//         thumbnail: course.thumbnail,
-//         orderId: paymentResponse.id,
-//         amount: paymentResponse.amount,
-//         currency: paymentResponse.currency,
-//         message: "Order initiated Successfully",
-//       });
-//     } catch (error) {
-//       console.log(error);
-//       return res.status(402).json({
-//         success: false,
-//         message: "Could not initiate the Order",
-//       });
-//     }
-//   } catch (error) {
-//     console.log("Something went wrong while capturing Payment : ", error);
-//     return res.status(402).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
-
-// // Hashing -> convert data into fixed length of encrypted form and that cannot be decrypted
-
-// // webHook -> a backend api store in our Razorpay account with secret
-// //            whenever any (specified) event occur, razorpay hits that backend api and send a secret in headers
-// //            Razorpay do not send secret in string format but it send in hashed format that we cannot decrypt
-// //            So we have to convert our secret in that format to compare
-
-// // we have to compare two secrets
-// // 1 : server Secret which is store in our server
-// // 2 : header Secret, come from razorpay when any specified event occur -> ex. Successfull Payment
-
-// // verifying the Signature of Razorpay and Server
-// exports.verifyPayment = async (req, res) => {
-//   try {
-//     const webHookSecret = "vw34EQ34Khdi329H392d92i0Jdr3n49JDI4dDREdwe";
-
-//     const signature = req.headers["x-razorpay-signature"];
-
-//     // hash webHookSecret
-//     const shaSum = crypto.createHmac("sha256", webHookSecret);
-//     shaSum.update(JSON.stringify(req.body));
-//     const digest = shaSum.digest("hex");
-
-//     if (signature === digest) {
-//       console.log("Payment is Authorised");
-
-//       const { courseId, userId } = req.body.payload.payment.entity.notes;
-
-//       // fulfill action after successful payment
-//       try {
-//         // add user in the studentEnrolled of Course schema -> means enroll the student in the course
-//         const enrolledCourse = await Course.findOneAndUpdate(
-//           { _id: courseId },
-//           {
-//             $push: { studentsEnrolled: userId },
-//           },
-//           { new: true }
-//         );
-
-//         if (!enrolledCourse) {
-//           return res.status(500).json({
-//             success: false,
-//             message: "Course not Found",
-//           });
-//         }
-
-//         enrolledCourse.sold += 1;
-
-//         await enrolledCourse.save();
-//         console.log("Enrolled Course : ", enrolledCourse);
-
-//         // add course in the courses of User schema -> means add the course in the User
-//         const enrolledStudent = await User.findOneAndUpdate(
-//           { _id: userId },
-//           {
-//             $push: { courses: courseId },
-//           },
-//           { new: true }
-//         );
-
-//         if (!enrolledStudent) {
-//           return res.status(500).json({
-//             success: false,
-//             message: "User not Found",
-//           });
-//         }
-
-//         console.log("Enrolled Student : ", enrolledStudent);
-
-//         function generateUniqueInvoiceNumber() {
-//           // Generate a random string
-//           const randomString = crypto
-//             .randomBytes(16)
-//             .toString("hex")
-//             .toUpperCase();
-
-//           // Format the current date as YYYYMMDD
-//           const today = new Date();
-//           const dateComponent = `${today.getFullYear()}${(today.getMonth() + 1)
-//             .toString()
-//             .padStart(2, "0")}${today.getDate().toString().padStart(2, "0")}`;
-
-//           // Combine random string and date component to form the invoice number
-//           const invoiceNumber = `INV-${dateComponent}-${randomString}`;
-
-//           return invoiceNumber;
-//         }
-
-//         const invoiceData = new Invoice({
-//           invoiceNumber: generateUniqueInvoiceNumber(),
-//           email: enrolledStudent.email,
-//           userId: userId,
-//           userName: `${enrolledStudent.firstName} ${enrolledStudent.lastName}`,
-//           courseId: courseId,
-//           courseName: enrolledCourse.courseName,
-//           price: enrolledCourse.price,
-//           contactNumber: enrolledStudent.contactNumber,
-//         });
-
-//         await invoiceData.save();
-
-//         return res.status(200).json({
-//           success: true,
-//           message:
-//             "Signature verified Successfully and Course Added Successfully",
-//         });
-//       } catch (error) {
-//         console.error("Error occurred while Enrolling Student:", error);
-//         return res.status(500).json({
-//           success: false,
-//           message: "Error occurred while Enrolling Student",
-//           error: error.message,
-//         });
-//       }
-//     } else {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Invalid Request",
-//       });
-//     }
-//   } catch (error) {
-//     console.log("Something went wrong while verifying Signature : ", error);
-//     return res.status(402).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
