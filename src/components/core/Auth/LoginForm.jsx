@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { login } from "../../../services/operations/authAPI";
-import { ACCOUNT_TYPE } from "../../../utils/constants";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ const LoginForm = () => {
     password: "",
   });
 
-  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
   const [showPassword, setShowPassword] = useState(false);
 
   const changeHandler = (event) => {
@@ -36,7 +34,7 @@ const LoginForm = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex gap-2 justify-center items-center bg-richblack-800 px-1 py-1 w-fit rounded-full shadow-input">
+      {/* <div className="flex gap-2 justify-center items-center bg-richblack-800 px-1 py-1 w-fit rounded-full shadow-input">
         <div
           className={`text-richblack-200 px-5 py-1 hover:bg-richblack-900 hover:cursor-pointer hover:text-richblack-5 rounded-full
             ${
@@ -61,7 +59,7 @@ const LoginForm = () => {
         >
           Instructor
         </div>
-      </div>
+      </div> */}
       <form
         action="submit"
         className="flex flex-col gap-4"
