@@ -76,7 +76,7 @@ const ContactUs = () => {
       </section>
 
       <section className="mb-20 flex flex-col gap-6 w-11/12 max-w-maxContent mx-auto">
-        <div className=" text-4xl text-richblack-5 font-bold text-center">
+        <div className=" text-4xl text-richblack-5 font-bold text-center max-[560px]:text-2xl max-[380px]:text-xl">
           Reviews From Other Learners
         </div>
         <ReviewSlider></ReviewSlider>

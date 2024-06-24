@@ -26,14 +26,17 @@ const Navbar = () => {
 
   const [categoryLinks, setCategoryLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const menuRef = useRef(null);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
   const getCategories = async () => {
     try {
+      setLoading(true);
       const result = await apiConnector("GET", categories.CATEGORIES_API);
       setCategoryLinks(result.data.data);
+      setLoading(false);
     } catch (error) {
       console.error("Could not Fetch the Category List ", error);
     }
@@ -91,22 +94,36 @@ const Navbar = () => {
                           group-hover:block
                       `}
                       >
-                        <div className="w-[2rem] h-[2rem] max-[380px]:w-[1.5rem] max-[380px]:h-[1.5rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[8.8rem] -top-0.5 max-[380px]:left-[7.3rem] max-[380px]:-top-1"></div>
-                        <div className="flex flex-col py-2 px-2 bg-richblack-25  absolute rounded-md left-[9.73rem] -top-14 max-[380px]:left-[7.9rem] max-[380px]:-top-[2.75rem] w-56 max-[440px]:w-40 max-[340px]:w-36">
-                          {categoryLinks.map((category, index) => {
-                            return (
-                              <NavLink
-                                to={`/catalog/${category.name
-                                  .toLowerCase()
-                                  .replace(" ", "-")
-                                  .replace("/", "_")}`}
-                                key={index}
-                                className="text-richblack-700 py-3 px-3 max-[440px]:text-sm hover:bg-richblack-200 rounded-md max-[340px]:text-[0.85rem] max-[440px]:p-[0.5rem] max-[440px]:px-1"
-                              >
-                                {category.name}
-                              </NavLink>
-                            );
-                          })}
+                        <div className="w-[2rem] h-[2rem] max-[380px]:w-[1.5rem] max-[380px]:h-[1.5rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[8.53rem] -top-0.5 max-[380px]:left-[7.1rem] max-[380px]:-top-1"></div>
+                        <div
+                          className={`flex flex-col py-2 px-2 bg-richblack-25  absolute rounded-md left-[9.45rem] -top-14 max-[380px]:left-[7.75rem] max-[380px]:-top-[2.75rem] w-56 max-[440px]:w-40 max-[340px]:w-36
+                            ${
+                              loading
+                                ? "text-center -top-[0.5rem] left-[9.39rem] rounded-l-[0.2rem] rounded-r-md max-[380px]:-top-[0.5rem] max-[380px]:rounded-l-[0.17rem] max-[380px]:left-[7.7rem]"
+                                : ""
+                            }
+                        `}
+                        >
+                          {loading ? (
+                            <div className="text-richblack-700 font-bold">
+                              Loading...
+                            </div>
+                          ) : (
+                            categoryLinks.map((category, index) => {
+                              return (
+                                <NavLink
+                                  to={`/catalog/${category.name
+                                    .toLowerCase()
+                                    .replace(" ", "-")
+                                    .replace("/", "_")}`}
+                                  key={index}
+                                  className="text-richblack-700 py-3 px-3 max-[440px]:text-sm hover:bg-richblack-200 rounded-md max-[340px]:text-[0.85rem] max-[440px]:p-[0.5rem] max-[440px]:px-1"
+                                >
+                                  {category.name}
+                                </NavLink>
+                              );
+                            })
+                          )}
                         </div>
                       </div>
                     </div>
@@ -160,21 +177,31 @@ const Navbar = () => {
 
                 <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 absolute top-10 transition-all duration-200">
                   <div className="w-[2rem] h-[2rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[3.39rem] top-2"></div>
-                  <div className="flex flex-col py-3 px-2 bg-richblack-25 text-md w-72 absolute top-4 rounded-md -left-32">
-                    {categoryLinks.map((category, index) => {
-                      return (
-                        <NavLink
-                          to={`/catalog/${category.name
-                            .toLowerCase()
-                            .replace(" ", "-")
-                            .replace("/", "_")}`}
-                          key={index}
-                          className="text-richblack-700 py-3 px-5 font-bold text-lg hover:bg-richblack-200 rounded-md"
-                        >
-                          {category.name}
-                        </NavLink>
-                      );
-                    })}
+                  <div
+                    className={`flex flex-col py-3 px-2 bg-richblack-25 text-md w-72 absolute top-4 rounded-md -left-32
+                      ${loading ? "text-center" : ""}
+                  `}
+                  >
+                    {loading ? (
+                      <div className="text-richblack-700 font-bold">
+                        Loading...
+                      </div>
+                    ) : (
+                      categoryLinks.map((category, index) => {
+                        return (
+                          <NavLink
+                            to={`/catalog/${category.name
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("/", "_")}`}
+                            key={index}
+                            className="text-richblack-700 py-3 px-5 font-bold text-lg hover:bg-richblack-200 rounded-md"
+                          >
+                            {category.name}
+                          </NavLink>
+                        );
+                      })
+                    )}
                   </div>
                 </div>
               </div>
