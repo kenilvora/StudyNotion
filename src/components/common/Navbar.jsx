@@ -94,12 +94,20 @@ const Navbar = () => {
                           group-hover:block
                       `}
                       >
-                        <div className="w-[2rem] h-[2rem] max-[380px]:w-[1.5rem] max-[380px]:h-[1.5rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[8.53rem] -top-0.5 max-[380px]:left-[7.1rem] max-[380px]:-top-1"></div>
+                        <div
+                          className={`w-[2rem] h-[2rem] max-[380px]:w-[1.5rem] max-[380px]:h-[1.5rem] bg-richblack-25 absolute rounded-sm rotate-45 left-[8.57rem] -top-0.5 max-[380px]:left-[7.12rem] max-[380px]:-top-1
+                            ${
+                              loading
+                                ? "rounded-[0.11rem] max-[380px]:rounded-[0.14rem]"
+                                : ""
+                            }
+                        `}
+                        ></div>
                         <div
                           className={`flex flex-col py-2 px-2 bg-richblack-25  absolute rounded-md left-[9.45rem] -top-14 max-[380px]:left-[7.75rem] max-[380px]:-top-[2.75rem] w-56 max-[440px]:w-40 max-[340px]:w-36
                             ${
                               loading
-                                ? "text-center -top-[0.5rem] left-[9.39rem] rounded-l-[0.2rem] rounded-r-md max-[380px]:-top-[0.5rem] max-[380px]:rounded-l-[0.17rem] max-[380px]:left-[7.7rem]"
+                                ? "text-center -top-[0.5rem] left-[9.5rem] rounded-l-[0.1rem] rounded-r-md max-[380px]:rounded-l-[0.05rem] max-[380px]:left-[7.8rem] max-[380px]:-top-2"
                                 : ""
                             }
                         `}
