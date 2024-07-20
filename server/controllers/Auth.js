@@ -206,10 +206,11 @@ exports.login = async (req, res) => {
 
           // create cookie and send response
           const options = {
-            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+            expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
             httpOnly: true,
           };
-          res.cookie("token", token, options).status(200).json({
+          res.cookie("token", token, options);
+          res.status(200).json({
             success: true,
             token,
             user,

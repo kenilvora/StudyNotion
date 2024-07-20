@@ -1,16 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const initialState = {
-  cart: localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [],
-  total: localStorage.getItem("total")
-    ? JSON.parse(localStorage.getItem("total"))
-    : 0,
-  totalItems: localStorage.getItem("totalItems")
-    ? JSON.parse(localStorage.getItem("totalItems"))
-    : 0,
+  cart: Cookies.get("cart") ? JSON.parse(Cookies.get("cart")) : [],
+  total: Cookies.get("total") ? JSON.parse(Cookies.get("total")) : 0,
+  totalItems: Cookies.get("totalItems") ? JSON.parse(Cookies.get("totalItems")) : 0,
 };
 
 const cartSlice = createSlice({
@@ -32,9 +27,9 @@ const cartSlice = createSlice({
       state.totalItems++;
       state.total += course.price;
       // Update to localstorage
-      localStorage.setItem("cart", JSON.stringify(state.cart));
-      localStorage.setItem("total", JSON.stringify(state.total));
-      localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
+      Cookies.set("cart", JSON.stringify(state.cart));
+      Cookies.set("total", JSON.stringify(state.total));
+      Cookies.set("totalItems", JSON.stringify(state.totalItems));
       // show toast
       toast.success("Course added to cart");
     },
@@ -48,9 +43,9 @@ const cartSlice = createSlice({
         state.total -= state.cart[index].price;
         state.cart.splice(index, 1);
         // Update to localstorage
-        localStorage.setItem("cart", JSON.stringify(state.cart));
-        localStorage.setItem("total", JSON.stringify(state.total));
-        localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
+        Cookies.set("cart", JSON.stringify(state.cart));
+        Cookies.set("total", JSON.stringify(state.total));
+        Cookies.set("totalItems", JSON.stringify(state.totalItems));
         // show toast
         toast.success("Course removed from cart");
       }

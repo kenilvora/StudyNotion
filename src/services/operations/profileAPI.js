@@ -4,6 +4,7 @@ import { apiConnector } from "../apiConnector";
 import { setLoading } from "../../slices/profileSlice";
 import { setUser } from "../../slices/profileSlice";
 import { logout } from "./authAPI";
+import Cookies from "js-cookie";
 
 const {
   UPDATE_DISPLAY_PICTURE_API,
@@ -35,7 +36,7 @@ export function updateDisplayPicture(displayPicture, token) {
       }
 
       dispatch(setUser(response.data.data));
-      localStorage.setItem("user", JSON.stringify({ ...response.data.data }));
+      Cookies.set("user", JSON.stringify({ ...response.data.data }));
 
       toast.success("Profile Picture Updated Successfully");
     } catch (error) {
@@ -77,10 +78,7 @@ export function updateProfile(
       }
 
       dispatch(setUser(response.data.userDetails));
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ ...response.data.userDetails })
-      );
+      Cookies.set("user", JSON.stringify({ ...response.data.userDetails }));
 
       toast.success("Profile Details Updated Successfully");
     } catch (error) {

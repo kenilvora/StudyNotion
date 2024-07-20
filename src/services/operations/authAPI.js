@@ -3,6 +3,7 @@ import { setLoading, setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
+import Cookies from "js-cookie";
 
 const {
   SENDOTP_API,
@@ -106,8 +107,8 @@ export function login(email, password, navigate) {
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
       dispatch(setUser({ ...response.data.user, image: userImage }));
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem(
+      Cookies.set("token", JSON.stringify(response.data.token));
+      Cookies.set(
         "user",
         JSON.stringify({ ...response.data.user, image: userImage })
       );

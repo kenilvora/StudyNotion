@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const initialState = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null,
+  user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null,
   loading: false,
 };
 
