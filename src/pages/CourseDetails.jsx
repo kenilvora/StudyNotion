@@ -119,9 +119,9 @@ const CourseDetails = () => {
                 <div className="flex max-[510px]:flex-col min-[510px]:items-center gap-2">
                   <div className="flex gap-2 items-center">
                     <div className="text-yellow-100 flex items-center gap-2">
-                      <div>{avgReviewCount || 4.5}</div>
+                      <div>{avgReviewCount || 0}</div>
                       <RatingStars
-                        Review_Count={avgReviewCount || "4.5"}
+                        Review_Count={avgReviewCount || "0"}
                         Star_Size={24}
                       ></RatingStars>
                     </div>

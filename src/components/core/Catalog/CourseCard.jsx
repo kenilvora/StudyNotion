@@ -18,9 +18,7 @@ const CourseCard = ({ course, height }) => {
           src={course?.thumbnail}
           alt="courseImage"
           className={`aspect-video rounded-lg object-cover w-full border border-richblack-100
-              ${
-                height ? height : ""
-              }
+              ${height ? height : ""}
           `}
         />
 
@@ -32,9 +30,9 @@ const CourseCard = ({ course, height }) => {
         </div>
 
         <div className="flex gap-2 items-center text-yellow-100 font-bold">
-          {avgReviewCount !== 0 ? avgReviewCount : "4.5"}
+          {avgReviewCount !== 0 ? avgReviewCount : "0"}
           <RatingStars
-            Review_Count={avgReviewCount !== 0 ? avgReviewCount : 4.5}
+            Review_Count={avgReviewCount !== 0 ? avgReviewCount : 0}
             Star_Size={24}
           ></RatingStars>
           <div className="text-richblack-300">

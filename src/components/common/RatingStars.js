@@ -20,7 +20,13 @@ function RatingStars({ Review_Count, Star_Size }) {
       empty: Number.isInteger(Review_Count) ? 5 - wholeStars : 4 - wholeStars,
     });
   }, [Review_Count]);
-  return (
+  return Review_Count == 0 ? (
+    <div className="flex gap-1 text-yellow-100">
+      {[...new Array(5)].map((_, i) => {
+        return <TiStarOutline key={i} size={Star_Size || 20} />;
+      })}
+    </div>
+  ) : (
     <div className="flex gap-1 text-yellow-100">
       {[...new Array(starCount.full)].map((_, i) => {
         return <TiStarFullOutline key={i} size={Star_Size || 20} />;
