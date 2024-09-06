@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://learning-studynotion.vercel.app/",
     credentials: true,
   })
 );
