@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [
   "https://learning-studynotion.vercel.app",
-  "https://studynotion.kenilvora.tech/",
+  "https://studynotion.kenilvora.tech",
   "http://localhost:3000",
 ];
 
