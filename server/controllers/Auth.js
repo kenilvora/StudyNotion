@@ -197,23 +197,19 @@ exports.login = async (req, res) => {
             id: user._id,
             accountType: user.accountType,
           };
-          const token = jwt.sign(payload, process.env.JWT_SECRET, {
-            expiresIn: "24h",
-          });
+          const token = jwt.sign(payload, process.env.JWT_SECRET);
           //   user = user.toObject();
-          user.token = token;
-          user.password = undefined;
+          // user.token = token;
+          // user.password = undefined;
 
           // create cookie and send response
-          const options = {
-            expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-            httpOnly: true,
-          };
-          res.cookie("token", token, options);
+          res.cookie("token", token, {
+            secure: true,
+            sameSite: "lax",
+          });
+
           res.status(200).json({
             success: true,
-            token,
-            user,
             message: "Logged In Successfully",
           });
         } else {
@@ -405,35 +401,54 @@ exports.changePassword = async (req, res) => {
   }
 };
 
-// verify-token
-exports.verifyToken = async (req, res) => {
+// me route
+exports.me = async (req, res) => {
   try {
-    const { id } = req.query;
+    const token = req.user.id;
 
-    if (!id) {
+    if (!token) {
       return res.status(400).json({
         success: false,
-        message: "UserId Missing",
+        message: "Token Missing",
       });
     }
 
-    const user = await User.findById(id);
+    const user = await User.findById(token).populate("additionalDetails");
 
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "User Details Not Found",
+        message: "User Not Found",
       });
     }
 
+    user.password = undefined;
+
     return res.status(200).json({
       success: true,
-      message: "User Details Found",
+      message: "User Found",
+      user,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Something went wrong while verifying Token",
+      message: "Unathorized Access",
+    });
+  }
+};
+
+// logout
+exports.logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Logout Failure",
     });
   }
 };

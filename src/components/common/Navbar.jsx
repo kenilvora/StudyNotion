@@ -36,9 +36,10 @@ const Navbar = () => {
       setLoading(true);
       const result = await apiConnector("GET", categories.CATEGORIES_API);
       setCategoryLinks(result.data.data);
-      setLoading(false);
     } catch (error) {
       console.error("Could not Fetch the Category List ", error);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,9 +1,10 @@
 import { toast } from "react-hot-toast";
 import { setLoading, setToken } from "../../slices/authSlice";
-import { setUser } from "../../slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
 import Cookies from "js-cookie";
+import { getMe } from "./profileAPI";
+import { setUser } from "../../slices/profileSlice";
 
 const {
   SENDOTP_API,
@@ -11,6 +12,7 @@ const {
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
+  LOGOUT,
 } = authEndpoints;
 
 export function sendOtp(email, navigate) {
@@ -36,9 +38,10 @@ export function sendOtp(email, navigate) {
     } catch (error) {
       console.log("SENDOTP API ERROR............", error);
       toast.error(error.response.data.message);
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
     }
-    dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
 }
 
@@ -79,9 +82,10 @@ export function signUp(
       console.log("SIGNUP API ERROR............", error);
       toast.error(error.response.data.message);
       navigate("/signup");
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
     }
-    dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
 }
 
@@ -102,23 +106,16 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful");
-      dispatch(setToken(response.data.token));
-      const userImage = response.data?.user?.image
-        ? response.data.user.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-      dispatch(setUser({ ...response.data.user, image: userImage }));
-      Cookies.set("token", JSON.stringify(response.data.token));
-      Cookies.set(
-        "user",
-        JSON.stringify({ ...response.data.user, image: userImage })
-      );
+      dispatch(setToken(Cookies.get("token")));
+      // dispatch(getMe());
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
       toast.error(error.response.data.message.split(",").at(0));
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
     }
-    dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
 }
 
@@ -181,12 +178,26 @@ export function resetPassword(
 }
 
 export function logout(navigate) {
-  return (dispatch) => {
-    dispatch(setToken(null));
-    dispatch(setUser(null));
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    toast.success("Logged Out");
-    navigate("/");
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    dispatch(setLoading(true));
+    try {
+      const res = await apiConnector("GET", LOGOUT);
+
+      if (!res.data.success) {
+        throw new Error(res.data.message);
+      }
+      localStorage.removeItem("user");
+      dispatch(setToken(null));
+      dispatch(setUser(null));
+      toast.success("Logged Out");
+      navigate("/");
+    } catch (e) {
+      console.log("LOGOUT ERROR............", e);
+      toast.error(e.response.data.message);
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
+    }
   };
 }

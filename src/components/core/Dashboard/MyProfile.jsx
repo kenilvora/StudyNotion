@@ -143,7 +143,7 @@ const MyProfile = () => {
               <div className="flex flex-col gap-1">
                 <div className="text-richblack-300 opacity-80">Gender</div>
                 <div className="font-bold">
-                  {user?.additionalDetails?.gender !== ""
+                  {user?.additionalDetails?.gender !== null
                     ? user?.additionalDetails?.gender
                     : "Add Gender"}
                 </div>

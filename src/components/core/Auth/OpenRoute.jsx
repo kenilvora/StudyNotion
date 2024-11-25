@@ -1,15 +1,34 @@
-// This will prevent authenticated users from accessing this route
-import { useSelector } from "react-redux"
-import { Navigate } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { getMe } from "../../../services/operations/profileAPI";
+import Spinner from "../../common/Spinner";
 
 function OpenRoute({ children }) {
-  const { token } = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const [isAuthenticated, setIsAuthenticated] = useState(null); // null indicates pending check
 
-  if (token === null) {
-    return children
-  } else {
-    return <Navigate to="/dashboard/my-profile" />
+  useEffect(() => {
+    const validateUser = async () => {
+      if (!token || token === "null") {
+        setIsAuthenticated(false); // No token, allow access
+        return;
+      }
+
+      const isValid = dispatch(getMe());
+      setIsAuthenticated(isValid);
+    };
+
+    validateUser();
+  }, [dispatch, token]);
+
+  if (isAuthenticated === null) {
+    // Optionally render a loading spinner or skeleton
+    return <Spinner />;
   }
+
+  return isAuthenticated ? <Navigate to="/dashboard/my-profile" /> : children;
 }
 
-export default OpenRoute
+export default OpenRoute;

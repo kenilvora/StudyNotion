@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
@@ -12,13 +12,11 @@ import VerifyEmail from "./pages/VerifyEmail";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import MyProfile from "./components/core/Dashboard/MyProfile";
-import { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Settings from "./components/core/Dashboard/Settings/Settings";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "./services/operations/authAPI";
+import { useSelector } from "react-redux";
 import Cart from "./components/core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import MyCourses from "./components/core/Dashboard/MyCourses";
@@ -31,38 +29,7 @@ import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard";
 
 function App() {
-  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-  let payload;
-  if (token && !payload) {
-    payload = JSON.parse(decodeURIComponent(atob(token.split(".")[1])));
-  }
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  function removeExpiredToken() {
-    if (!token) {
-      return;
-    }
-    const now = Math.floor(new Date().getTime() / 1000); // Current time in seconds since Unix epoch
-    // console.log((payload.exp - now)/3600);
-    if (payload.exp && now > payload.exp) {
-      dispatch(logout(navigate));
-      window.location.reload();
-      navigate("/login");
-    } else {
-      return;
-    }
-  }
-
-  useEffect(() => {
-    const intervalId = setInterval(removeExpiredToken, 60000);
-
-    return () => {
-      // console.log("Clean");
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">

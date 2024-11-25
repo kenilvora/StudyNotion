@@ -21,8 +21,9 @@ const EnrolledCourses = () => {
       setEnrolledCourses(response);
     } catch (error) {
       console.log("Unable to Fetch Enrolled Courses");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {

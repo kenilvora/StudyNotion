@@ -84,7 +84,6 @@ const ResetNewPassword = () => {
     }
 
     const token = location.pathname.split("/").at(-1);
-
     dispatch(
       resetPassword(
         formData.newPassword,

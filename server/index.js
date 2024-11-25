@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
+    credentials: true,
     origin: function (origin, callback) {
       if (allowedOrigins.includes(origin) || !origin) {
         callback(null, true);
@@ -37,7 +38,6 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true,
   })
 );
 app.use(

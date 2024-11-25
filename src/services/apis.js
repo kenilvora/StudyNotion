@@ -7,7 +7,7 @@ export const authEndpoints = {
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/resetPassword",
-  VERIFY_TOKEN: BASE_URL + "/auth/verifyToken",
+  LOGOUT: BASE_URL + "/auth/logout",
 };
 
 // PROFILE ENDPOINTS
@@ -15,6 +15,7 @@ export const profileEndpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
   GET_INSTRUCTOR_DASHBOARD_DATA_API: BASE_URL + "/profile/instructorDashboard",
+  ME: BASE_URL + "/auth/me",
 };
 
 // STUDENTS ENDPOINTS

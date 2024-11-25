@@ -43,10 +43,10 @@ const userSchema = new mongoose.Schema(
       ref: "Profile",
       required: true,
     },
-    token: {
+    passwordToken: {
       type: String,
     },
-    resetPasswordExpires: {
+    tokenExpires: {
       type: Date,
     },
     courses: [

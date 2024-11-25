@@ -4,8 +4,7 @@ import Cookies from "js-cookie";
 const initialState = {
   signupData: null,
   loading: false,
-  token: Cookies.get("token") ? JSON.parse(Cookies.get("token")) : null,
-  isValidToken: false,
+  token: Cookies.get("token") ? Cookies.get("token") : null,
 };
 
 const authSlice = createSlice({
@@ -21,13 +20,9 @@ const authSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload;
     },
-    setIsValidToken(state, action) {
-      state.isValidToken = action.payload;
-    },
   },
 });
 
-export const { setSignupData, setLoading, setToken, setIsValidToken } =
-  authSlice.actions;
+export const { setSignupData, setLoading, setToken } = authSlice.actions;
 
 export default authSlice.reducer;

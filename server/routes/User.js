@@ -6,6 +6,8 @@ const {
   sendOTP,
   changePassword,
   verifyToken,
+  me,
+  logout,
 } = require("../controllers/Auth");
 
 const {
@@ -42,10 +44,13 @@ router.put("/change-password", auth, changePassword);
 // Route for generating a reset password token
 router.post("/reset-password-token", resetPasswordToken);
 
-// Route for verifying Token
-router.get("/verifyToken", verifyToken)
-
 // Route for resetting user's password after verification
 router.put("/resetPassword", resetPassword);
+
+// Route for identifying the user
+router.get("/me", auth, me);
+
+// Route for logout
+router.get("/logout", logout);
 
 module.exports = router;

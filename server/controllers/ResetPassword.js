@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const { passwordUpdated } = require("../mail/templates/passwordUpdate");
 const dns = require("dns");
 const { resetPassword } = require("../mail/templates/resetPassword");
+
 // resetPasswordToken
 exports.resetPasswordToken = async (req, res) => {
   try {
@@ -50,12 +51,13 @@ exports.resetPasswordToken = async (req, res) => {
         }
         // generate token
         const token = crypto.randomBytes(20).toString("hex");
+        console.log(token);
         // update user by adding token and expiration time in User
         const updatedUser = await User.findOneAndUpdate(
           { email: email },
           {
-            resetPasswordToken: token,
-            resetPasswordExpires: Date.now() + 3600000,
+            passwordToken: token,
+            tokenExpires: Date.now() + 3600000,
           },
           { new: true }
         );
@@ -63,7 +65,7 @@ exports.resetPasswordToken = async (req, res) => {
         console.log("DETAILS ", updatedUser);
 
         // create Url
-        const url = `https://learning-studynotion.vercel.app///reset-password/${token}`;
+        const url = `https://learning-studynotion.vercel.app/reset-password/${token}`;
         // send mail containing the url
         try {
           const name = `${updatedUser.firstName} ${updatedUser.lastName}`;
@@ -109,6 +111,7 @@ exports.resetPassword = async (req, res) => {
   try {
     // fetch data from req ki body
     const { token, password, confirmPassword } = req.body;
+    console.log(req.body);
     // validate data
     if (!token || !password || !confirmPassword) {
       return res.status(403).json({
@@ -123,7 +126,7 @@ exports.resetPassword = async (req, res) => {
       });
     }
     // get user details from db using token
-    const userDetails = await User.findOne({ resetPasswordToken: token });
+    const userDetails = await User.findOne({ passwordToken: token });
     // if no entry -> invalid token
     if (!userDetails) {
       return res.status(400).json({
@@ -132,7 +135,7 @@ exports.resetPassword = async (req, res) => {
       });
     }
     // check time of token
-    if (userDetails.resetPasswordExpires < Date.now()) {
+    if (userDetails.tokenExpires < Date.now()) {
       return res.status(400).json({
         success: false,
         message: "Token is expired, Please regenerate your token",
@@ -142,7 +145,7 @@ exports.resetPassword = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     // upadate the passwowrd
     await User.findOneAndUpdate(
-      { resetPasswordToken: token },
+      { passwordToken: token },
       {
         password: hashedPassword,
       },
