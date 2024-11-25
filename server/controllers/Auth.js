@@ -205,7 +205,8 @@ exports.login = async (req, res) => {
           // create cookie and send response
           res.cookie("token", token, {
             secure: true,
-            sameSite: "None",
+            sameSite: "none",
+            httpOnly: false,
           });
 
           res.status(200).json({
