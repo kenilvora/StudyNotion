@@ -205,8 +205,7 @@ exports.login = async (req, res) => {
           // create cookie and send response
           res.cookie("token", token, {
             secure: true,
-            sameSite: "lax",
-            httpOnly: true,
+            sameSite: "none",
           });
 
           res.status(200).json({
@@ -444,8 +443,7 @@ exports.logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       secure: true,
-      sameSite: "lax",
-      httpOnly: true,
+      sameSite: "none",
     });
     return res.status(200).json({
       success: true,
