@@ -105,8 +105,8 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful");
-      console.log("Token recieve from backend : ", Cookies.get("token"));
-      dispatch(setToken(Cookies.get("token")));
+      Cookies.set("token", response.data.token);
+      dispatch(setToken(response.data.token));
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);

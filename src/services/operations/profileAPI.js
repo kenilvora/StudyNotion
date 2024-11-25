@@ -178,7 +178,6 @@ export function getMe() {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-      console.log("ME API RESPONSE............", response.data);
       dispatch(setUser(response.data.user));
       localStorage.setItem("user", JSON.stringify(response.data.user));
       return true;

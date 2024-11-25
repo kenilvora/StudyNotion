@@ -206,12 +206,12 @@ exports.login = async (req, res) => {
           res.cookie("token", token, {
             secure: true,
             sameSite: "none",
-            httpOnly: false,
           });
 
           res.status(200).json({
             success: true,
             message: "Logged In Successfully",
+            token: token,
           });
         } else {
           return res.status(401).json({

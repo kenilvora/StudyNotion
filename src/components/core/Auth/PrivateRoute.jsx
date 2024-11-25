@@ -27,8 +27,6 @@ const PrivateRoute = ({ children }) => {
     return <Spinner />;
   }
 
-  console.log("User is authenticated: ", isAuthenticated);
-
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
