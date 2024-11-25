@@ -187,6 +187,7 @@ export function logout(navigate) {
         throw new Error(res.data.message);
       }
       localStorage.removeItem("user");
+      Cookies.remove("token");
       dispatch(setToken(null));
       dispatch(setUser(null));
       toast.success("Logged Out");
