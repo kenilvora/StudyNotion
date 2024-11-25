@@ -105,6 +105,7 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful");
+      console.log("Token recieve from backend : ", Cookies.get("token"));
       dispatch(setToken(Cookies.get("token")));
       navigate("/dashboard/my-profile");
     } catch (error) {
