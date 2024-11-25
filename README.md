@@ -10,8 +10,6 @@ StudyNotion is an e-learning platform designed for skill development, allowing u
 - **Authorization**: Fine-grained access control based on user roles such as **Admin**, **Instructor**, and **Student**.
 - **RBAC**: Ensures that only authorized users can access specific resources or perform certain actions.
 
----
-
 ## **RBAC Implementation Details**
 
 ### **Authentication**
