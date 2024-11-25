@@ -205,7 +205,8 @@ exports.login = async (req, res) => {
           // create cookie and send response
           res.cookie("token", token, {
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
+            httpOnly: true,
           });
 
           res.status(200).json({
@@ -441,7 +442,11 @@ exports.me = async (req, res) => {
 // logout
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      secure: true,
+      sameSite: "lax",
+      httpOnly: true,
+    });
     return res.status(200).json({
       success: true,
       message: "Logged Out Successfully",
