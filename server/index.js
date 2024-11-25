@@ -17,7 +17,6 @@ const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [
-  "https://learning-studynotion.vercel.app",
   "https://studynotion.kenilvora.tech",
   "http://localhost:3000",
 ];
@@ -31,13 +30,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: function (origin, callback) {
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "https://learning-studynotion.vercel.app",
   })
 );
 app.use(

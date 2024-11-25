@@ -3,7 +3,6 @@ import { setLoading, setToken } from "../../slices/authSlice";
 import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
 import Cookies from "js-cookie";
-import { getMe } from "./profileAPI";
 import { setUser } from "../../slices/profileSlice";
 
 const {
@@ -107,7 +106,6 @@ export function login(email, password, navigate) {
 
       toast.success("Login Successful");
       dispatch(setToken(Cookies.get("token")));
-      // dispatch(getMe());
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
