@@ -14,7 +14,6 @@ import Spinner from "../../common/Spinner";
 
 const CourseReviewModal = ({ setReviewModal }) => {
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
   const { courseId } = useParams();
   const [loading, setLoading] = useState(false);
 
@@ -37,14 +36,11 @@ const CourseReviewModal = ({ setReviewModal }) => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await createRating(
-        {
-          courseId: courseId,
-          rating: data.courseRating,
-          review: data.courseReview,
-        },
-        token
-      );
+      await createRating({
+        courseId: courseId,
+        rating: data.courseRating,
+        review: data.courseReview,
+      });
     } catch (error) {
       console.log("Error while creating reating and review");
     }

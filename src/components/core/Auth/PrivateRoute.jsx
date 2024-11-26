@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { getMe } from "../../../services/operations/profileAPI";
 import Spinner from "../../common/Spinner";
-import Cookies from "js-cookie";
 
 const PrivateRoute = ({ children }) => {
   const dispatch = useDispatch();
@@ -28,12 +27,7 @@ const PrivateRoute = ({ children }) => {
     return <Spinner />;
   }
 
-  if (isAuthenticated === false) {
-    Cookies.remove("token");
-    <Navigate to="/login" />;
-  }
-
-  return children;
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

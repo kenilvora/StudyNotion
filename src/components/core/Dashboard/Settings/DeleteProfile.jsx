@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAccount } from "../../../../services/operations/profileAPI";
 
 const DeleteProfile = () => {
-  const { token } = useSelector((state) => state.auth);
   const [confirmationModal, setConfirmationModal] = useState(null);
 
   const dispatch = useDispatch();
@@ -31,12 +30,11 @@ const DeleteProfile = () => {
           onClick={() => {
             setConfirmationModal({
               text1: "Are You Sure?",
-              text2:
-                "Confirm deletion? All your data lost.",
+              text2: "Confirm deletion? All your data lost.",
               btn1: "Delete My Account",
               btn2: "Cancel",
               btn1Handler: () => {
-                dispatch(deleteAccount(token, navigate));
+                dispatch(deleteAccount(navigate));
               },
               btn2Handler: () => {
                 setConfirmationModal(null);

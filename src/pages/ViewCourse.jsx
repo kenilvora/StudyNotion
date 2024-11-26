@@ -14,7 +14,6 @@ import Spinner from "../components/common/Spinner";
 
 const ViewCourse = () => {
   const { courseId } = useParams();
-  const { token } = useSelector((state) => state.auth);
   const [reviewModal, setReviewModal] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,7 @@ const ViewCourse = () => {
     const getFullCourseDetails = async () => {
       setLoading(true);
       try {
-        const courseData = await getFullDetailsOfCourse(courseId, token);
+        const courseData = await getFullDetailsOfCourse(courseId);
         dispatch(setEntireCourseData(courseData?.courseDetails));
         dispatch(
           setCourseSectionData(courseData?.courseDetails?.courseContent)

@@ -12,13 +12,11 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
   const { paymentLoading } = useSelector((state) => state.course);
 
   const handleBuyCourse = () => {
     const courses = cart.cart.map((course) => course?._id);
-    console.log(courses);
-    buyCourse(user, token, dispatch, navigate, courses);
+    buyCourse(user, dispatch, navigate, courses);
     return;
   };
   return (

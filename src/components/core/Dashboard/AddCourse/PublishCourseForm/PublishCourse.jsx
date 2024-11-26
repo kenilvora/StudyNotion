@@ -23,7 +23,6 @@ const PublishCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { token } = useSelector((state) => state.auth);
   const { course } = useSelector((state) => state.course);
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +41,7 @@ const PublishCourse = () => {
       formData.append("courseId", course._id);
       formData.append("status", "Published");
       setLoading(true);
-      const result = await editCourseDetails(formData, token);
+      const result = await editCourseDetails(formData, );
       if (result) {
         dispatch(setCourse(result));
       }

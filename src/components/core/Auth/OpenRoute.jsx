@@ -28,12 +28,7 @@ function OpenRoute({ children }) {
     return <Spinner />;
   }
 
-  if (isAuthenticated === false) {
-    Cookies.remove("token");
-    return children;
-  }
-
-  return <Navigate to="/dashboard/my-profile" />;
+  return isAuthenticated ? <Navigate to="/dashboard/my-profile" /> : children;
 }
 
 export default OpenRoute;

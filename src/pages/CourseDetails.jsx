@@ -37,7 +37,7 @@ const CourseDetails = () => {
       return;
     }
     if (token && user && user?.accountType === ACCOUNT_TYPE.STUDENT) {
-      buyCourse(user, token, dispatch, navigate, [courseId]);
+      buyCourse(user, dispatch, navigate, [courseId]);
       return;
     } else if (!token || !user) {
       setConfirmationModal({

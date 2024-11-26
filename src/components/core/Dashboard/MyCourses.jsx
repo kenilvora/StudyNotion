@@ -27,15 +27,10 @@ import { formatDate } from "../../../services/formatDate";
 import { convertSecondsToDuration } from "../../../utils/secondToDuration";
 
 const MyCourses = () => {
-  const {
-    register,
-    setValue,
-    watch,
-  } = useForm();
+  const { register, setValue, watch } = useForm();
 
   const checkBox = watch("deleteAllCourse");
 
-  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -44,7 +39,7 @@ const MyCourses = () => {
 
   const getMyCourses = async () => {
     try {
-      const response = await fetchInstructorCourses(token);
+      const response = await fetchInstructorCourses();
       console.log(response);
       setMyCourses(response);
     } catch (error) {
@@ -61,13 +56,13 @@ const MyCourses = () => {
       courseId,
       categoryId,
     };
-    await deleteCourse(data, token);
+    await deleteCourse(data);
     getMyCourses();
     setConfirmationModal(null);
   };
 
   const deleteAllCourse = async () => {
-    await deleteAllCourses(token);
+    await deleteAllCourses();
     setValue("deleteAllCourse", false);
     getMyCourses();
     setConfirmationModal(null);

@@ -10,8 +10,6 @@ import { FaPause } from "react-icons/fa6";
 
 const VideoDetails = () => {
   const { courseId, sectionId, subSectionId } = useParams();
-  const { token } = useSelector((state) => state.auth);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -186,13 +184,10 @@ const VideoDetails = () => {
   const handleLectureCompleted = async () => {
     setMarkLectureLoading(true);
     try {
-      const res = await markLectureAsComplete(
-        {
-          courseId: courseId,
-          subSectionId: subSectionId,
-        },
-        token
-      );
+      const res = await markLectureAsComplete({
+        courseId: courseId,
+        subSectionId: subSectionId,
+      });
       if (res) {
         dispatch(updateCompletedLectures(subSectionId));
       }

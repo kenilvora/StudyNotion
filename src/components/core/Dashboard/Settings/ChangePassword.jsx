@@ -7,8 +7,6 @@ import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const ChangePassword = () => {
-  const { token } = useSelector((state) => state.auth);
-
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
@@ -31,8 +29,7 @@ const ChangePassword = () => {
       changePassword(
         data.oldPassword,
         data.newPassword,
-        data.confirmNewPassword,
-        token
+        data.confirmNewPassword
       )
     );
   };

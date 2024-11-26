@@ -7,7 +7,6 @@ import { updateProfile } from "../../../../services/operations/profileAPI";
 
 const EditProfile = () => {
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
 
   const {
     register,
@@ -43,8 +42,7 @@ const EditProfile = () => {
         data.dateOfBirth,
         data.gender,
         data.contactNumber,
-        data.about,
-        token
+        data.about
       )
     );
   };

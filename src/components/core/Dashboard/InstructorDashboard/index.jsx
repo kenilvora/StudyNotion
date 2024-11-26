@@ -13,19 +13,18 @@ const InstructorDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [instructorData, setInstructorData] = useState(null);
   const [courses, setCourses] = useState([]);
-  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
 
   useEffect(() => {
     const getCourseDataWithStats = async () => {
       setLoading(true);
       try {
-        const coursesData = await fetchInstructorCourses(token);
+        const coursesData = await fetchInstructorCourses();
         if (coursesData) {
           setCourses(coursesData);
         }
 
-        const data = await getInstructorData(token);
+        const data = await getInstructorData();
         if (data) {
           setInstructorData(data);
         }

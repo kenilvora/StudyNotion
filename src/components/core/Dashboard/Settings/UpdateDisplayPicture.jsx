@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 const UpdateDisplayPicture = () => {
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
 
   const [newImageFile, setNewImageFile] = useState(null);
   const [previewFileSrc, setPreviewFileSrc] = useState(null);
@@ -36,7 +35,7 @@ const UpdateDisplayPicture = () => {
       const formData = new FormData();
       formData.append("displayPicture", newImageFile);
 
-      dispatch(updateDisplayPicture(formData, token)).then(() => {
+      dispatch(updateDisplayPicture(formData)).then(() => {
         setNewImageFile(null);
         setPreviewFileSrc(null);
       });

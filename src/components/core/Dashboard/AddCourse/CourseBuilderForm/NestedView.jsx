@@ -17,7 +17,6 @@ import SubSectionModal from "./SubSectionModal";
 
 const NestedView = ({ handleChangeEditSectionName }) => {
   const { course } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [addSubSection, setAddSubSection] = useState(null);
   const [viewSubSection, setViewSubSection] = useState(null);
@@ -33,7 +32,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       courseId,
     };
 
-    const result = await deleteSection(data, token);
+    const result = await deleteSection(data);
     if (result) {
       dispatch(setCourse(result));
     }
@@ -53,7 +52,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       courseId,
     };
 
-    const result = await deleteSubSection(data, token);
+    const result = await deleteSubSection(data);
     if (result) {
       dispatch(setCourse(result));
     }

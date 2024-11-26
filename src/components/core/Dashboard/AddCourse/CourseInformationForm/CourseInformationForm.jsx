@@ -12,10 +12,7 @@ import DragAndDropInput from "../DragAndDropInput";
 import ChipInput from "./ChipInput";
 import CourseInstructionInput from "./CourseInstructionInput";
 import { FaAngleRight } from "react-icons/fa6";
-import {
-  setCourse,
-  setStep,
-} from "../../../../../slices/courseSlice";
+import { setCourse, setStep } from "../../../../../slices/courseSlice";
 import toast from "react-hot-toast";
 import { COURSE_STATUS } from "../../../../../utils/constants";
 
@@ -34,7 +31,6 @@ const CourseInformationForm = () => {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const { course, editCourse } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
 
   const getCategories = async () => {
     setLoading(true);
@@ -119,7 +115,7 @@ const CourseInformationForm = () => {
         }
 
         setLoading(true);
-        const result = await editCourseDetails(formData, token);
+        const result = await editCourseDetails(formData);
         setLoading(false);
         if (result) {
           dispatch(setStep(2));
@@ -144,7 +140,7 @@ const CourseInformationForm = () => {
     formData.append("status", COURSE_STATUS.DRAFT);
 
     setLoading(true);
-    const result = await addCourseDetails(formData, token);
+    const result = await addCourseDetails(formData);
     setLoading(false);
     if (result) {
       dispatch(setStep(2));

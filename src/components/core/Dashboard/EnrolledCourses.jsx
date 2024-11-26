@@ -8,8 +8,6 @@ import { HiClock } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const EnrolledCourses = () => {
-  const { token } = useSelector((state) => state.auth);
-
   const [enrolledCourses, setEnrolledCourses] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -17,7 +15,7 @@ const EnrolledCourses = () => {
   const getEnrolledCourses = async () => {
     setLoading(true);
     try {
-      const response = await getUserEnrolledCourses(token);
+      const response = await getUserEnrolledCourses();
       setEnrolledCourses(response);
     } catch (error) {
       console.log("Unable to Fetch Enrolled Courses");

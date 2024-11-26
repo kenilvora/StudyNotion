@@ -25,7 +25,6 @@ const CourseBuilderForm = () => {
   } = useForm();
 
   const { course } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
 
   const [loading, setLoading] = useState(false);
   const [editSectionId, setEditSectionId] = useState(null); // Contains SectionID
@@ -60,22 +59,16 @@ const CourseBuilderForm = () => {
     let result;
 
     if (editSectionId) {
-      result = await updateSection(
-        {
-          sectionName: data.courseSectionName,
-          sectionId: editSectionId,
-          courseId: course._id,
-        },
-        token
-      );
+      result = await updateSection({
+        sectionName: data.courseSectionName,
+        sectionId: editSectionId,
+        courseId: course._id,
+      });
     } else {
-      result = await createSection(
-        {
-          sectionName: data.courseSectionName,
-          courseId: course._id,
-        },
-        token
-      );
+      result = await createSection({
+        sectionName: data.courseSectionName,
+        courseId: course._id,
+      });
     }
 
     // update course

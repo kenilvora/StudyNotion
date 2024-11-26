@@ -257,15 +257,12 @@ const enrollStudent = async (courses, userId, res) => {
           Date.now()
         )
       );
-
-      console.log("Email sent successfully, ", mailResponse);
     } catch (error) {
       console.log(
         "Error occurred while sending Course Registration mail ",
         error
       );
     }
-    
   } catch (error) {
     console.log(error);
     return res.status(500).json({

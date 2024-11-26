@@ -30,7 +30,6 @@ const SubSectionModal = ({
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { course } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (view || edit) {
@@ -75,7 +74,7 @@ const SubSectionModal = ({
         }
 
         setLoading(true);
-        const result = await updateSubSection(formData, token);
+        const result = await updateSubSection(formData);
         if (result) {
           dispatch(setCourse(result));
           setModalData(null);
@@ -96,7 +95,7 @@ const SubSectionModal = ({
       formData.append("videoFile", data.lectureVideo);
 
       setLoading(true);
-      const result = await createSubSection(formData, token);
+      const result = await createSubSection(formData);
       if (result) {
         console.log(result);
         dispatch(setCourse(result));
