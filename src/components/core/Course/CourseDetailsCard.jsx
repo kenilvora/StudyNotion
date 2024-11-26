@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsFileEarmarkCheck } from "react-icons/bs";
 import { FaShareFromSquare } from "react-icons/fa6";
 import { GiArrowCursor } from "react-icons/gi";
@@ -20,6 +20,8 @@ const CourseDetailsCard = ({
   const { user } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [inCart, setInCart] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
 
   const addToCartHandler = () => {
     if (user && user?.accountType !== ACCOUNT_TYPE.STUDENT) {
@@ -53,6 +55,17 @@ const CourseDetailsCard = ({
     copy(window.location.href);
     toast.success("Link Copied to Clipboard");
   };
+
+  useEffect(() => {
+    const index = cart.findIndex(
+      (item) => item._id === courseData?.courseDetails?._id
+    );
+    if (index >= 0) {
+      setInCart(true);
+    } else {
+      setInCart(false);
+    }
+  }, [cart]);
 
   return (
     <div className="flex flex-shrink-0 flex-col bg-richblack-700 w-[95%] min-[500px]:w-[80%] min-[951px]:w-[32%] min-[951px]:absolute top-0 right-0 min-[951px]:max-w-[380px] rounded-xl px-4 py-5 justify-center transition-all duration-300 hover:scale-105 hover:shadow-card max-[951px]:mt-10">
@@ -90,7 +103,7 @@ const CourseDetailsCard = ({
                 className="bg-richblack-800 text-white font-bold py-2 text-xl w-full rounded-lg shadow-black3"
                 onClick={addToCartHandler}
               >
-                Add To Cart
+                {inCart ? "Added to Cart" : "Add to Cart"}
               </button>
             </>
           )}

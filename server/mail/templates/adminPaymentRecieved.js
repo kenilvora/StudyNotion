@@ -81,7 +81,7 @@ exports.adminPaymentRecieved = (
                              .join("")}
                         </ul>
                         <p><strong>Total Amount Received:</strong> ₹${totalAmount}</p>
-                        <p><strong>Payment Date:</strong> ${paymentDate}</p>
+                        <p><strong>Payment Date & Time:</strong> ${paymentDate}</p>
                     </div>
                     <p>Thank you for your continued support.</p>
                 </div>

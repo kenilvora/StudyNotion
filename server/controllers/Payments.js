@@ -245,6 +245,16 @@ const enrollStudent = async (courses, userId, res) => {
         courseEnrollmentEmail(courseData, userName)
       );
 
+      const formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+      }).format(new Date());
+
       await mailSender(
         process.env.ADMIN_MAIL_ID,
         "Payment Received Successfully",
@@ -254,7 +264,7 @@ const enrollStudent = async (courses, userId, res) => {
           contactNumber,
           courseData,
           totalAmount,
-          Date.now()
+          formattedDate
         )
       );
     } catch (error) {

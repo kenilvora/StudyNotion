@@ -4,6 +4,7 @@ import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
 import Cookies from "js-cookie";
 import { setUser } from "../../slices/profileSlice";
+import { resetItemCart } from "../../slices/cartSlice";
 
 const {
   SENDOTP_API,
@@ -190,6 +191,7 @@ export function logout(navigate) {
       Cookies.remove("token");
       dispatch(setToken(null));
       dispatch(setUser(null));
+      dispatch(resetItemCart());
       toast.success("Logged Out");
       navigate("/");
     } catch (e) {

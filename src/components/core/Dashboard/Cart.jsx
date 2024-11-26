@@ -66,11 +66,11 @@ const Cart = () => {
                         </div>
                         <div className="flex gap-2 items-center">
                           <div className="text-yellow-100 font-bold">
-                            {course?.avgReviewCount || 4.5}
+                            {course?.avgReviewCount}
                           </div>
                           <div className="flex justify-center items-center">
                             <RatingStars
-                              Review_Count={course?.avgReviewCount || 4.5}
+                              Review_Count={course?.avgReviewCount}
                               Star_Size={24}
                             ></RatingStars>
                           </div>
