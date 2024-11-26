@@ -69,7 +69,7 @@ const Sidebar = () => {
         <div className="absolute -bottom-0.5 w-screen flex justify-between bg-richblack-600 z-50 gap-1 px-8">
           <div className="flex justify-between w-full">
             {sidebarLinks.map((link) => {
-              if (link.type && link.type !== user.accountType) {
+              if (link.type && link.type !== user?.accountType) {
                 return null;
               }
               return <SidebarLink link={link} key={link.id}></SidebarLink>;

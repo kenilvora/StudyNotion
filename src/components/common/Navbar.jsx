@@ -234,7 +234,7 @@ const Navbar = () => {
 
         {/* Login / SignUp / Profile / Dashboard / SerchIcon / CartIcon */}
         <div className="flex gap-4 justify-center items-center">
-          {user && user?.accountType === "Student" && (
+          {token && user && user?.accountType === "Student" && (
             <NavLink
               to={"/dashboard/cart"}
               className="relative text-richblack-25  hover:text-yellow-100"
