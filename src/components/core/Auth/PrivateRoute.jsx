@@ -11,12 +11,12 @@ const PrivateRoute = ({ children }) => {
 
   useEffect(() => {
     const validateUser = async () => {
-      if (!token || token === "null") {
+      if (!token || token === null || token === undefined) {
         setIsAuthenticated(false); // Redirect if no token
         return;
       }
 
-      const isValid = dispatch(getMe());
+      const isValid = await dispatch(getMe());
       setIsAuthenticated(isValid);
     };
 

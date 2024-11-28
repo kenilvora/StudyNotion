@@ -11,12 +11,12 @@ function OpenRoute({ children }) {
 
   useEffect(() => {
     const validateUser = async () => {
-      if (!token || token === "null") {
-        setIsAuthenticated(false); // No token, allow access
+      if (!token || token === null || token === undefined) {
+        setIsAuthenticated(false);
         return;
       }
 
-      const isValid = dispatch(getMe());
+      const isValid = await dispatch(getMe());
       setIsAuthenticated(isValid);
     };
 
@@ -24,7 +24,6 @@ function OpenRoute({ children }) {
   }, [dispatch, token]);
 
   if (isAuthenticated === null) {
-    // Optionally render a loading spinner or skeleton
     return <Spinner />;
   }
 
