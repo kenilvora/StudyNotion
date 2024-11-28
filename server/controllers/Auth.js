@@ -235,7 +235,6 @@ exports.sendOTP = async (req, res) => {
   try {
     // fetch email from req ki body
     const { email } = req.body;
-    console.log(email);
 
     // validate data
     if (!email) {

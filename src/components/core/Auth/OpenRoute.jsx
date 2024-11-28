@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { getMe } from "../../../services/operations/profileAPI";
 import Spinner from "../../common/Spinner";
+import Cookies from "js-cookie";
+import { setToken } from "../../../slices/authSlice";
 
 function OpenRoute({ children }) {
   const dispatch = useDispatch();
@@ -22,6 +24,13 @@ function OpenRoute({ children }) {
 
     validateUser();
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      Cookies.remove("token");
+      dispatch(setToken(null));
+    }
+  }, [isAuthenticated, dispatch]);
 
   if (isAuthenticated === null) {
     return <Spinner />;
