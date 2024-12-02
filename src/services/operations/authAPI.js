@@ -106,7 +106,11 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful");
-      Cookies.set("token", response.data.token);
+      Cookies.set("token", response.data.token, {
+        sameSite: "lax",
+        secure: true,
+        maxAge: 31536000000,
+      });
       dispatch(setToken(response.data.token));
       navigate("/dashboard/my-profile");
     } catch (error) {
@@ -188,7 +192,11 @@ export function logout(navigate) {
         throw new Error(res.data.message);
       }
       localStorage.removeItem("user");
-      Cookies.remove("token");
+      Cookies.remove("token", {
+        sameSite: "lax",
+        secure: true,
+        maxAge: 0,
+      });
       dispatch(setToken(null));
       dispatch(setUser(null));
       dispatch(resetItemCart());

@@ -27,7 +27,12 @@ const PrivateRoute = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      Cookies.remove("token");
+      Cookies.remove("token", {
+        sameSite: "lax",
+        secure: true,
+        maxAge: 0,
+      });
+      localStorage.clear();
       dispatch(setToken(null));
     }
   }, [isAuthenticated, dispatch]);

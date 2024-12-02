@@ -205,7 +205,8 @@ exports.login = async (req, res) => {
           // create cookie and send response
           res.cookie("token", token, {
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
+            maxAge: 3131536000000,
           });
 
           res.status(200).json({
