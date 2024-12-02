@@ -40,4 +40,11 @@ export const sidebarLinks = [
     path: "/dashboard/cart",
     type: ACCOUNT_TYPE.STUDENT,
   },
+  {
+    id: 7,
+    name: "Catalog",
+    path: "/dashboard/manage-categories",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "TbCategoryPlus",
+  },
 ];

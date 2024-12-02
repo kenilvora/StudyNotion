@@ -44,7 +44,7 @@ const EnrolledCourses = () => {
       ) : (
         <div className="flex flex-col">
           <header className="flex bg-richblack-700 p-4 rounded-t-lg">
-            <div className="text-richblack-50 font-bold w-[60%] max-[720px]:w-full">
+            <div className="text-richblack-50 max-[720px]:hidden font-bold w-[60%] max-[720px]:w-full">
               Course Name
             </div>
             <div className="w-[15%] max-[720px]:hidden text-richblack-50 font-bold">

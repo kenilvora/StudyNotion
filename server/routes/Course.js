@@ -29,6 +29,7 @@ const {
   createCategory,
   getAllCategory,
   categoryPageDetails,
+  deleteCategory,
 } = require("../controllers/Categories");
 const {
   createRatingAndreview,
@@ -92,6 +93,9 @@ router.delete("/deleteAllCourses", auth, isInstructor, deleteAllCourses);
 
 // Create a new Category
 router.post("/createCategory", auth, isAdmin, createCategory);
+
+// Delete a Category
+router.delete("/deleteCategory", auth, isAdmin, deleteCategory);
 
 // Show All Categories
 router.get("/getAllCategories", getAllCategory);

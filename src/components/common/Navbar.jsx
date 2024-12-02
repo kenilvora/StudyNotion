@@ -6,7 +6,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { FaChevronRight } from "react-icons/fa";
 import { PiShoppingCartBold } from "react-icons/pi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileDropDown from "../core/Auth/ProfileDropDown";
 import { categories } from "../../services/apis";
 import { apiConnector } from "../../services/apiConnector";
@@ -17,10 +17,13 @@ import { BsFillInfoSquareFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { setCategories } from "../../slices/categorySlice";
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
+  const { allCategories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   const cartData = useSelector((state) => state.cart);
   const location = useLocation();
 
@@ -35,6 +38,7 @@ const Navbar = () => {
     try {
       setLoading(true);
       const result = await apiConnector("GET", categories.CATEGORIES_API);
+      dispatch(setCategories(result.data.data));
       setCategoryLinks(result.data.data);
     } catch (error) {
       console.error("Could not Fetch the Category List ", error);
@@ -46,8 +50,12 @@ const Navbar = () => {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   useEffect(() => {
-    getCategories();
-  }, []);
+    if (!allCategories || allCategories.length === 0) {
+      getCategories();
+    } else {
+      setCategoryLinks(allCategories);
+    }
+  }, [allCategories]);
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
