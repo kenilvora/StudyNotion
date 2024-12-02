@@ -42,7 +42,7 @@ export const sidebarLinks = [
   },
   {
     id: 7,
-    name: "Catalog",
+    name: "Manage Categories",
     path: "/dashboard/manage-categories",
     type: ACCOUNT_TYPE.ADMIN,
     icon: "TbCategoryPlus",
