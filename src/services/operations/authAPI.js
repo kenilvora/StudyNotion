@@ -106,11 +106,6 @@ export function login(email, password, navigate) {
       console.log("LOGIN API RESPONSE............", response);
 
       toast.success("Login Successful");
-      // Cookies.set("token", response.data.token, {
-      //   sameSite: "Lax",
-      //   secure: true,
-      //   expires: 365,
-      // });
       dispatch(setToken(response.data.token));
       navigate("/dashboard/my-profile");
     } catch (error) {
@@ -192,10 +187,6 @@ export function logout(navigate) {
         throw new Error(res.data.message);
       }
       localStorage.removeItem("user");
-      // Cookies.remove("token", {
-      //   sameSite: "Lax",
-      //   secure: true,
-      // });
       dispatch(setToken(null));
       dispatch(setUser(null));
       dispatch(resetItemCart());

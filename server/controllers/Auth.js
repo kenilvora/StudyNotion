@@ -198,9 +198,6 @@ exports.login = async (req, res) => {
             accountType: user.accountType,
           };
           const token = jwt.sign(payload, process.env.JWT_SECRET);
-          //   user = user.toObject();
-          // user.token = token;
-          // user.password = undefined;
 
           // create cookie and send response
           res.cookie("token", token, {
