@@ -27,11 +27,7 @@ function OpenRoute({ children }) {
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      Cookies.remove("token", {
-        sameSite: "lax",
-        secure: true,
-        maxAge: 0,
-      });
+      Cookies.remove("token");
       localStorage.clear();
       dispatch(setToken(null));
     }

@@ -186,7 +186,7 @@ exports.login = async (req, res) => {
         if (!user) {
           return res.status(401).json({
             success: false,
-            message: "User is not registered, Please SignUP first to continue",
+            message: "User is not registered",
           });
         }
 
@@ -443,7 +443,8 @@ exports.logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       secure: true,
-      sameSite: "none",
+      sameSite: "lax",
+      maxAge: 0,
     });
     return res.status(200).json({
       success: true,

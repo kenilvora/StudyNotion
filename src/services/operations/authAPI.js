@@ -99,23 +99,19 @@ export function login(email, password, navigate) {
         password,
       });
 
-      console.log("LOGIN API RESPONSE............", response);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
 
+      console.log("LOGIN API RESPONSE............", response);
+
       toast.success("Login Successful");
-      Cookies.set("token", response.data.token, {
-        sameSite: "lax",
-        secure: true,
-        maxAge: 31536000000,
-      });
+      Cookies.set("token", response.data.token);
       dispatch(setToken(response.data.token));
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
-      toast.error(error.response.data.message.split(",").at(0));
+      toast.error(error.response.data.message);
     } finally {
       dispatch(setLoading(false));
       toast.dismiss(toastId);
@@ -192,11 +188,7 @@ export function logout(navigate) {
         throw new Error(res.data.message);
       }
       localStorage.removeItem("user");
-      Cookies.remove("token", {
-        sameSite: "lax",
-        secure: true,
-        maxAge: 0,
-      });
+      Cookies.remove("token");
       dispatch(setToken(null));
       dispatch(setUser(null));
       dispatch(resetItemCart());
