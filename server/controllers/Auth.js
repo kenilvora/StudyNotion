@@ -204,7 +204,7 @@ exports.login = async (req, res) => {
             secure: true,
             sameSite: "lax",
             maxAge: 3131536000000,
-            domain: "kenilvora.tech",
+            domain: "studynotion.kenilvora.tech",
           });
 
           res.status(200).json({
