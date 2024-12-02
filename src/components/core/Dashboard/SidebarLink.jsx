@@ -6,7 +6,7 @@ import { PiShoppingCartBold } from "react-icons/pi";
 
 const SidebarLink = ({ link }) => {
   const Icon =
-    link.name === "Catalog" ? IC[link.icon] : link.icon ? Icons[link.icon] : "";
+    link.name === "Manage Categories" ? IC[link.icon] : link.icon ? Icons[link.icon] : "";
   const location = useLocation();
 
   const matchRoute = (route) => {
