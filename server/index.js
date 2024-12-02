@@ -28,6 +28,7 @@ app.use(
     origin: [
       "https://learning-studynotion.vercel.app",
       "https://studynotion.kenilvora.tech",
+      "http://localhost:3000",
     ],
   })
 );

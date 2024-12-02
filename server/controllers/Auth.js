@@ -207,6 +207,7 @@ exports.login = async (req, res) => {
             secure: true,
             sameSite: "lax",
             maxAge: 3131536000000,
+            domain: "kenilvora.tech",
           });
 
           res.status(200).json({
@@ -444,7 +445,7 @@ exports.logout = async (req, res) => {
     res.clearCookie("token", {
       secure: true,
       sameSite: "lax",
-      maxAge: 0,
+      domain: "kenilvora.tech",
     });
     return res.status(200).json({
       success: true,
