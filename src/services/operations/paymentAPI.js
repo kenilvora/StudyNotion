@@ -87,8 +87,9 @@ export const buyCourse = async (user, dispatch, navigate, courses) => {
   } catch (error) {
     console.log("BUY COURSE API ERROR...", error);
     toast.error("Could Not Make Payment");
+  } finally {
+    toast.dismiss(toastId);
   }
-  toast.dismiss(toastId);
 };
 
 async function sendPaymentSuccessEmail(response, amount) {
@@ -122,7 +123,8 @@ async function verifyPayment(bodyData, dispatch, navigate) {
   } catch (error) {
     console.log("VERIFY PAYMENT ERROR...", error);
     toast.error("Could not verify the Payment");
+  } finally {
+    dispatch(setPaymentLoading(false));
+    toast.dismiss(toastId);
   }
-  dispatch(setPaymentLoading(false));
-  toast.dismiss(toastId);
 }

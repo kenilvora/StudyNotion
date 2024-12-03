@@ -34,9 +34,10 @@ export const getAllCourses = async () => {
   } catch (error) {
     console.log("GET_ALL_COURSE_API API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 export const fetchCourseDetails = async (courseId) => {
@@ -56,14 +57,14 @@ export const fetchCourseDetails = async (courseId) => {
     console.log("COURSE_DETAILS_API API ERROR............", error);
     result = error.response.data;
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // fetching the available course categories
 export const fetchCourseCategories = async () => {
-  const toastId = toast.loading("Loading...");
   let result = [];
   try {
     const response = await apiConnector("GET", COURSE_CATEGORIES_API);
@@ -75,9 +76,9 @@ export const fetchCourseCategories = async () => {
   } catch (error) {
     console.log("COURSE_CATEGORY_API API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // add the course details
@@ -97,9 +98,10 @@ export const addCourseDetails = async (data) => {
   } catch (error) {
     console.log("CREATE COURSE API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // edit the course details
@@ -119,9 +121,10 @@ export const editCourseDetails = async (data) => {
   } catch (error) {
     console.log("EDIT COURSE API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // create a section
@@ -139,9 +142,10 @@ export const createSection = async (data) => {
   } catch (error) {
     console.log("CREATE SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // create a subsection
@@ -159,9 +163,10 @@ export const createSubSection = async (data) => {
   } catch (error) {
     console.log("CREATE SUB-SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // update a section
@@ -179,9 +184,10 @@ export const updateSection = async (data) => {
   } catch (error) {
     console.log("UPDATE SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // update a subsection
@@ -199,9 +205,10 @@ export const updateSubSection = async (data) => {
   } catch (error) {
     console.log("UPDATE SUB-SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // delete a section
@@ -219,9 +226,10 @@ export const deleteSection = async (data) => {
   } catch (error) {
     console.log("DELETE SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // delete a subsection
@@ -239,9 +247,10 @@ export const deleteSubSection = async (data) => {
   } catch (error) {
     console.log("DELETE SUB-SECTION API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // fetching all courses under a specific instructor
@@ -258,9 +267,10 @@ export const fetchInstructorCourses = async () => {
   } catch (error) {
     console.log("INSTRUCTOR COURSES API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  return result;
 };
 
 // delete a course
@@ -276,8 +286,9 @@ export const deleteCourse = async (data) => {
   } catch (error) {
     console.log("DELETE COURSE API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
   }
-  toast.dismiss(toastId);
 };
 
 // Delete All Courses Of Instructor
@@ -293,8 +304,9 @@ export const deleteAllCourses = async () => {
   } catch (error) {
     console.log("DELETE COURSE API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
   }
-  toast.dismiss(toastId);
 };
 
 // get full details of a course
@@ -362,7 +374,8 @@ export const createRating = async (data) => {
     success = false;
     console.log("CREATE RATING API ERROR............", error);
     toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return success;
   }
-  toast.dismiss(toastId);
-  return success;
 };
