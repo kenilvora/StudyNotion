@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://studynotion.kenilvora.tech",
+    origin: ["https://studynotion.kenilvora.tech", "http://localhost:3000"],
   })
 );
 app.use(

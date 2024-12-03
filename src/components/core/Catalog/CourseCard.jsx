@@ -9,6 +9,7 @@ const CourseCard = ({ course, height }) => {
   useEffect(() => {
     const count = GetAvgRating(course?.ratingAndReviews);
     setAvgReviewCount(count);
+    console.log(course.courseName + " -> " + count + " -> " + course.ratingAndReviews);
   }, [course]);
 
   return (
