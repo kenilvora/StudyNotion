@@ -22,6 +22,9 @@ const Catalog = () => {
   useEffect(() => {
     const getCategory = async () => {
       try {
+        if (loading === false) {
+          setLoading(true);
+        }
         const result = await fetchCourseCategories();
         const category_Id = result.filter(
           (category) => category.name.toLowerCase() === catalogName
