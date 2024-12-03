@@ -6,7 +6,6 @@ import Spinner from "../components/common/Spinner";
 import Footer from "../components/common/Footer";
 import CourseSlider from "../components/core/Catalog/CourseSlider";
 import CourseCard from "../components/core/Catalog/CourseCard";
-import toast from "react-hot-toast";
 
 const Catalog = () => {
   const location = useLocation();
@@ -19,8 +18,6 @@ const Catalog = () => {
 
   const [categoryId, setCategoryId] = useState(null);
   const [catalogData, setCatalogData] = useState(null);
-
-  const toastId = toast.loading("Loading...");
 
   useEffect(() => {
     const getCategory = async () => {
@@ -46,7 +43,6 @@ const Catalog = () => {
         console.log("Catalog Data Error -> ", error);
       } finally {
         setLoading(false);
-        toast.dismiss(toastId);
       }
     };
 
