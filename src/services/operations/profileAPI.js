@@ -18,8 +18,8 @@ const { GET_INSTRUCTOR_DASHBOARD_DATA_API, GET_USER_ENROLLED_COURSES_API, ME } =
 export function updateDisplayPicture(displayPicture) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    dispatch(setLoading(true));
     try {
+      dispatch(setLoading(true));
       const response = await apiConnector(
         "PUT",
         UPDATE_DISPLAY_PICTURE_API,

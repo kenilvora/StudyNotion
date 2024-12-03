@@ -25,18 +25,23 @@ const NestedView = ({ handleChangeEditSectionName }) => {
   const [loading, setLoading] = useState(false);
 
   const deleteSectionBtnHandler = async (sectionId, courseId) => {
-    setLoading(true);
-    setConfirmationModal(null);
-    const data = {
-      sectionId,
-      courseId,
-    };
+    try {
+      setLoading(true);
+      setConfirmationModal(null);
+      const data = {
+        sectionId,
+        courseId,
+      };
 
-    const result = await deleteSection(data);
-    if (result) {
-      dispatch(setCourse(result));
+      const result = await deleteSection(data);
+      if (result) {
+        dispatch(setCourse(result));
+      }
+    } catch (error) {
+      console.log("Error in deleteSectionBtnHandler -> ", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const deleteSubSectionBtnHandler = async (
@@ -44,19 +49,24 @@ const NestedView = ({ handleChangeEditSectionName }) => {
     subSectionId,
     courseId
   ) => {
-    setLoading(true);
-    setConfirmationModal(null);
-    const data = {
-      sectionId,
-      subSectionId,
-      courseId,
-    };
+    try {
+      setLoading(true);
+      setConfirmationModal(null);
+      const data = {
+        sectionId,
+        subSectionId,
+        courseId,
+      };
 
-    const result = await deleteSubSection(data);
-    if (result) {
-      dispatch(setCourse(result));
+      const result = await deleteSubSection(data);
+      if (result) {
+        dispatch(setCourse(result));
+      }
+    } catch (error) {
+      console.log("Error in deleteSubSectionBtnHandler -> ", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

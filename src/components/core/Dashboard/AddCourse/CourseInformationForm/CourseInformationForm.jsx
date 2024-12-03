@@ -33,12 +33,17 @@ const CourseInformationForm = () => {
   const { course, editCourse } = useSelector((state) => state.course);
 
   const getCategories = async () => {
-    setLoading(true);
-    const categories = await fetchCourseCategories();
-    if (categories.length > 0) {
-      setCategory(categories);
+    try {
+      setLoading(true);
+      const categories = await fetchCourseCategories();
+      if (categories.length > 0) {
+        setCategory(categories);
+      }
+    } catch (error) {
+      console.log("Error in getCategories -> ", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -113,13 +118,17 @@ const CourseInformationForm = () => {
             JSON.stringify(data.courseInstructions)
           );
         }
-
-        setLoading(true);
-        const result = await editCourseDetails(formData);
-        setLoading(false);
-        if (result) {
-          dispatch(setStep(2));
-          dispatch(setCourse(result));
+        try {
+          setLoading(true);
+          const result = await editCourseDetails(formData);
+          if (result) {
+            dispatch(setStep(2));
+            dispatch(setCourse(result));
+          }
+        } catch (error) {
+          console.log("Error in editCourseDetails -> ", error);
+        } finally {
+          setLoading(false);
         }
       } else {
         toast.error("No Changes Made to the Form");
@@ -139,12 +148,17 @@ const CourseInformationForm = () => {
     formData.append("instructions", JSON.stringify(data.courseInstructions));
     formData.append("status", COURSE_STATUS.DRAFT);
 
-    setLoading(true);
-    const result = await addCourseDetails(formData);
-    setLoading(false);
-    if (result) {
-      dispatch(setStep(2));
-      dispatch(setCourse(result));
+    try {
+      setLoading(true);
+      const result = await addCourseDetails(formData);
+      if (result) {
+        dispatch(setStep(2));
+        dispatch(setCourse(result));
+      }
+    } catch (error) {
+      console.log("Error in addCourseDetails -> ", error);
+    } finally {
+      setLoading(false);
     }
   };
 

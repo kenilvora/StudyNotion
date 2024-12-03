@@ -40,12 +40,17 @@ const PublishCourse = () => {
       const formData = new FormData();
       formData.append("courseId", course._id);
       formData.append("status", "Published");
-      setLoading(true);
-      const result = await editCourseDetails(formData, );
-      if (result) {
-        dispatch(setCourse(result));
+      try {
+        setLoading(true);
+        const result = await editCourseDetails(formData);
+        if (result) {
+          dispatch(setCourse(result));
+        }
+      } catch (error) {
+        console.log("Error in PublishCourse -> ", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
       dispatch(resetCourseState());
       setValue("publishCourse", false);
       navigate("/dashboard/my-courses");

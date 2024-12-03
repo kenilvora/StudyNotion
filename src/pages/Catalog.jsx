@@ -9,7 +9,7 @@ import CourseCard from "../components/core/Catalog/CourseCard";
 
 const Catalog = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const catalogName = location.pathname
     .split("/")
     .at(-1)
@@ -21,13 +21,16 @@ const Catalog = () => {
 
   useEffect(() => {
     const getCategory = async () => {
-      setLoading(true);
-      const result = await fetchCourseCategories();
-      const category_Id = result.filter(
-        (category) => category.name.toLowerCase() === catalogName
-      )[0]?._id;
-      setCategoryId(category_Id);
-      if (!category_Id) {
+      try {
+        setLoading(true);
+        const result = await fetchCourseCategories();
+        const category_Id = result.filter(
+          (category) => category.name.toLowerCase() === catalogName
+        )[0]?._id;
+        setCategoryId(category_Id);
+      } catch (error) {
+        console.log("Category Error -> ", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -42,8 +45,9 @@ const Catalog = () => {
         setCatalogData(result);
       } catch (error) {
         console.log("Catalog Data Error -> ", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     if (categoryId) {

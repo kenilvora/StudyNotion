@@ -31,8 +31,9 @@ const InstructorDashboard = () => {
       } catch (error) {
         console.log("Error while fetching course data with stats");
         toast.error("Could not get instructor dashboard data");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     getCourseDataWithStats();

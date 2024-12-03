@@ -22,8 +22,8 @@ const ViewCourse = () => {
   useEffect(() => {
     console.log("View Course Page Render");
     const getFullCourseDetails = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
         const courseData = await getFullDetailsOfCourse(courseId);
         dispatch(setEntireCourseData(courseData?.courseDetails));
         dispatch(
@@ -33,8 +33,9 @@ const ViewCourse = () => {
         dispatch(setCompletedLectures(courseData?.completedVideos));
       } catch (error) {
         console.log("Could Not Get Full Course Details ...", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     getFullCourseDetails();

@@ -2,7 +2,6 @@ import { toast } from "react-hot-toast";
 import { setLoading, setToken } from "../../slices/authSlice";
 import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
-import Cookies from "js-cookie";
 import { setUser } from "../../slices/profileSlice";
 import { resetItemCart } from "../../slices/cartSlice";
 
@@ -138,9 +137,10 @@ export function getResetPasswordToken(email, setEmailSent) {
     } catch (error) {
       console.log("RESETPASSTOKEN ERROR............", error);
       toast.error(error.response.data.message);
+    } finally {
+      toast.dismiss(toastId);
+      dispatch(setLoading(false));
     }
-    toast.dismiss(toastId);
-    dispatch(setLoading(false));
   };
 }
 
@@ -170,9 +170,10 @@ export function resetPassword(
     } catch (error) {
       console.log("RESETPASSWORD ERROR............", error);
       toast.error(error.response.data.message);
+    } finally {
+      toast.dismiss(toastId);
+      dispatch(setLoading(false));
     }
-    toast.dismiss(toastId);
-    dispatch(setLoading(false));
   };
 }
 

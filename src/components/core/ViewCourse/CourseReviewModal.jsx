@@ -43,9 +43,10 @@ const CourseReviewModal = ({ setReviewModal }) => {
       });
     } catch (error) {
       console.log("Error while creating reating and review");
+    } finally {
+      setLoading(false);
+      setReviewModal(false);
     }
-    setLoading(false);
-    setReviewModal(false);
   };
 
   return (

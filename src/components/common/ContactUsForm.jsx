@@ -42,8 +42,9 @@ const ContactUsForm = (props) => {
     } catch (error) {
       console.log("Could not Send Data -> ", error);
       toast.error("Could Not Send Message");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {

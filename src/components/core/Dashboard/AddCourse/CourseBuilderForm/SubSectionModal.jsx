@@ -72,14 +72,18 @@ const SubSectionModal = ({
         if (data.lectureVideo !== modalData.videoUrl) {
           formData.append("video", data.lectureVideo);
         }
-
-        setLoading(true);
-        const result = await updateSubSection(formData);
-        if (result) {
-          dispatch(setCourse(result));
-          setModalData(null);
+        try {
+          setLoading(true);
+          const result = await updateSubSection(formData);
+          if (result) {
+            dispatch(setCourse(result));
+            setModalData(null);
+          }
+        } catch (error) {
+          console.log("Error in updateSubSection -> ", error);
+        } finally {
+          setLoading(false);
         }
-        setLoading(false);
       } else {
         toast.error("No changes made to the form");
       }
@@ -93,15 +97,19 @@ const SubSectionModal = ({
       formData.append("title", data.lectureTitle);
       formData.append("description", data.lectureDesc);
       formData.append("videoFile", data.lectureVideo);
-
-      setLoading(true);
-      const result = await createSubSection(formData);
-      if (result) {
-        console.log(result);
-        dispatch(setCourse(result));
-        setModalData(null);
+      try {
+        setLoading(true);
+        const result = await createSubSection(formData);
+        if (result) {
+          console.log(result);
+          dispatch(setCourse(result));
+          setModalData(null);
+        }
+      } catch (error) {
+        console.log("Error in createSubSection -> ", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
       return;
     }
   };

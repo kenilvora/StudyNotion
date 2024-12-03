@@ -54,10 +54,15 @@ const CourseDetails = () => {
 
   useEffect(() => {
     const getCourseDetails = async () => {
-      setLoading(true);
-      const res = await fetchCourseDetails(courseId);
-      setCourseData(res);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const res = await fetchCourseDetails(courseId);
+        setCourseData(res);
+      } catch (error) {
+        console.log("Error while fetching course details");
+      } finally {
+        setLoading(false);
+      }
     };
     getCourseDetails();
   }, [courseId]);

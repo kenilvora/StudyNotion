@@ -300,7 +300,6 @@ export const deleteAllCourses = async () => {
 // get full details of a course
 export const getFullDetailsOfCourse = async (courseId) => {
   const toastId = toast.loading("Loading...");
-  //   dispatch(setLoading(true));
   let result = null;
   try {
     const response = await apiConnector(
@@ -321,11 +320,11 @@ export const getFullDetailsOfCourse = async (courseId) => {
   } catch (error) {
     console.log("COURSE_FULL_DETAILS_API API ERROR............", error);
     result = error.response.data;
-    // toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+    return result;
   }
-  toast.dismiss(toastId);
-  //   dispatch(setLoading(false));
-  return result;
 };
 
 // mark a lecture as complete
