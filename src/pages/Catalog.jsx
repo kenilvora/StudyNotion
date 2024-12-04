@@ -30,6 +30,8 @@ const Catalog = () => {
           (category) => category.name.toLowerCase() === catalogName
         )[0]?._id;
         if (!category_Id || category_Id === undefined || category_Id === null) {
+          setCategoryId(null);
+          setCatalogData(null);
           setLoading(false);
           return;
         }
