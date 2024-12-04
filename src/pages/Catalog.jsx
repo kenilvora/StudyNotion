@@ -29,6 +29,10 @@ const Catalog = () => {
         const category_Id = result.filter(
           (category) => category.name.toLowerCase() === catalogName
         )[0]?._id;
+        if (!category_Id || category_Id === undefined || category_Id === null) {
+          setLoading(false);
+          return;
+        }
         setCategoryId(category_Id);
       } catch (error) {
         console.log("Category Error -> ", error);
