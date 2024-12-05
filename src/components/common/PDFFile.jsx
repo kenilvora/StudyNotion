@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFFile = ({ logo, paymentDetails, date }) => (
+const PDFFile = ({ logo, paymentDetails, date, receiptNo }) => (
   <Document>
     <Page style={styles.page}>
       <View style={styles.container}>
@@ -140,7 +140,7 @@ const PDFFile = ({ logo, paymentDetails, date }) => (
         {/* Payment Details */}
         <View style={styles.section}>
           <Text>
-            <Text style={styles.label}>Receipt No:</Text> {paymentDetails._id}
+            <Text style={styles.label}>Receipt No:</Text> {receiptNo}
           </Text>
           <Text>
             <Text style={styles.label}>Date:</Text> {date}

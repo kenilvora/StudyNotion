@@ -67,6 +67,17 @@ const PaymentHistory = () => {
                   hour12: true,
                 }).format(new Date(paymentData.date));
 
+                function generateReceiptNo(value) {
+                  // Extract only the first 8 characters for brevity
+                  const shortValue = value.substring(0, 8).toUpperCase();
+
+                  // Get a timestamp for uniqueness
+                  const timestamp = Date.now().toString(36).toUpperCase();
+
+                  // Combine with a prefix for receipt number
+                  return `REC-${shortValue}-${timestamp}`;
+                }
+
                 return (
                   <div
                     key={index}
@@ -113,6 +124,7 @@ const PaymentHistory = () => {
                             date={date}
                             logo={logo}
                             paymentDetails={paymentData}
+                            receiptNo={generateReceiptNo(paymentData._id)}
                           ></PDFFile>
                         }
                         fileName={`Payment-Receipt-${paymentData.paymentId}.pdf`}
