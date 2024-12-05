@@ -70,9 +70,12 @@ const PaymentHistory = () => {
                 return (
                   <div
                     key={index}
-                    className="flex gap-4 items-center justify-between p-4 hover:bg-richblack-800 hover:cursor-pointer"
+                    className="flex max-[700px]:flex-col gap-4 items-center justify-between p-4 hover:bg-richblack-800 hover:cursor-pointer"
                   >
-                    <div className="text-richblack-50 font-bold text-lg">
+                    <div
+                      className="text-richblack-50 font-bold text-lg max-[600px]:text-base 
+                    max-[500px]:text-sm"
+                    >
                       <span className="text-yellow-50">Payment successful</span>{" "}
                       for{" "}
                       <HighlightText
@@ -101,7 +104,7 @@ const PaymentHistory = () => {
                     </div>
 
                     <button
-                      className="bg-yellow-100 flex gap-2 px-4 py-1.5 border-l-2 border-richblack-25 text-black font-bold rounded-md"
+                      className="bg-yellow-100 gap-2 px-4 py-1.5 border-l-2 border-richblack-25 text-black font-bold rounded-md max-[700px]:w-full"
                       title="Download Invoice"
                     >
                       <PDFDownloadLink
