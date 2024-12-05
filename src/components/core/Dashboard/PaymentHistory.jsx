@@ -6,109 +6,14 @@ import Spinner from "../../common/Spinner";
 import HighlightText from "../HomePage/HighlightText";
 import toast from "react-hot-toast";
 import logo from "../../../assets/Logo/Logo-Full-Dark.png";
-import html2pdf from "html2pdf.js";
-import ReactDOMServer from "react-dom/server";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFFile from "../../common/PDFFile";
 
 const { PAYMENT_HISTORY_API } = settingsEndpoints;
 
 const PaymentHistory = () => {
   const [paymentHistoryData, setPaymentHistoryData] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const pdfJSX = (paymentDetails) => {
-    const date = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "2-digit",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }).format(new Date(paymentDetails.date));
-    return (
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="min-w-3xl max-w-3xl mx-auto p-6 bg-white rounded-lg border border-blue-300 shadow-lg">
-          <div className="text-center mb-6">
-            <img src={logo} alt="Company Logo" className="w-40 mx-auto mb-4" />
-            <h1 className="text-2xl font-semibold text-gray-700">
-              Payment Receipt
-            </h1>
-          </div>
-
-          <div className="mb-6">
-            <p>
-              <span className="font-bold text-blue-500">Receipt No:</span>{" "}
-              {paymentDetails._id}
-            </p>
-            <p>
-              <span className="font-bold text-blue-500">Date:</span> {date}
-            </p>
-            <p>
-              <span className="font-bold text-blue-500">Customer Name:</span>{" "}
-              {paymentDetails.userName}
-            </p>
-            <p>
-              <span className="font-bold text-blue-500">Email:</span>{" "}
-              {paymentDetails.email}
-            </p>
-            <p>
-              <span className="font-bold text-blue-500">Contact No.:</span>{" "}
-              {paymentDetails.contactNumber}
-            </p>
-            <p>
-              <span className="font-bold text-blue-500">Payment ID:</span>{" "}
-              {paymentDetails.paymentId}
-            </p>
-          </div>
-
-          <div className="mb-6">
-            <h2 className="text-lg font-bold mb-4">Courses Purchased : </h2>
-            <table className="w-full border">
-              <thead>
-                <tr className="bg-blue-600 text-white">
-                  <th className="text-left py-2 px-4 border border-black">
-                    Course Name
-                  </th>
-                  <th className="text-left py-2 px-4 border border-black">
-                    Price
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paymentDetails.courses.map((course) => (
-                  <tr key={course.courseId}>
-                    <td className="py-2 px-4 border border-black">
-                      {course.courseName}
-                    </td>
-                    <td className="py-2 px-4 border border-black">
-                      ₹{course.coursePrice}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="text-right text-lg font-semibold">
-            Total Amount: ₹{paymentDetails.totalAmount}
-          </div>
-
-          <div className="mt-8 text-center text-sm">
-            <p>Thank you for your purchase!</p>
-            <p>
-              If you have any questions, contact us at{" "}
-              <a
-                href="mailto:studynotion111@gmail.com"
-                className="text-blue-600 hover:underline"
-              >
-                inquiry@gmail.com
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   useEffect(() => {
     // Fetch Payment History
@@ -128,28 +33,6 @@ const PaymentHistory = () => {
 
     getPaymentHistory();
   }, []);
-
-  const downloadReceiptAsPDF = (paymentDetails) => {
-    const pdf = ReactDOMServer.renderToString(pdfJSX(paymentDetails));
-
-    const options = {
-      margin: 1,
-      filename: "Payment-Receipt.pdf",
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
-
-    html2pdf()
-      .set(options)
-      .from(pdf)
-      .toPdf() // Generate PDF object
-      .get("pdf")
-      .then((pdf) => {
-        // Ensure text is selectable
-        pdf.setFont("helvetica", "normal");
-      })
-      .save();
-  };
 
   return (
     <div className="flex flex-col gap-12 text-richblack-5 justify-center">
@@ -220,13 +103,21 @@ const PaymentHistory = () => {
                     <button
                       className="bg-yellow-100 flex gap-2 px-4 py-1.5 border-l-2 border-richblack-25 text-black font-bold rounded-md"
                       title="Download Invoice"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        downloadReceiptAsPDF(paymentData);
-                      }}
                     >
-                      Download Invoice
+                      <PDFDownloadLink
+                        document={
+                          <PDFFile
+                            date={date}
+                            logo={logo}
+                            paymentDetails={paymentData}
+                          ></PDFFile>
+                        }
+                        fileName={`Payment-Receipt-${paymentData.paymentId}.pdf`}
+                      >
+                        {({ loading }) =>
+                          loading ? "Loading..." : "Download Invoice"
+                        }
+                      </PDFDownloadLink>
                     </button>
                   </div>
                 );
