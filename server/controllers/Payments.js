@@ -126,7 +126,7 @@ exports.verifyPayment = async (req, res) => {
     if (expectedSignature === razorpay_signature) {
       // Payment Verified Successfully
       console.log("Payment Verified Successfully");
-      await enrollStudent(courses, userId, res);
+      await enrollStudent(courses, userId, res, razorpay_payment_id);
 
       // return res
       return res.status(200).json({
@@ -149,7 +149,7 @@ exports.verifyPayment = async (req, res) => {
   }
 };
 
-const enrollStudent = async (courses, userId, res) => {
+const enrollStudent = async (courses, userId, res, paymentId) => {
   try {
     if (!courses || courses.length === 0 || !userId) {
       return res.status(400).json({
@@ -162,10 +162,9 @@ const enrollStudent = async (courses, userId, res) => {
     let courseData = [];
     let totalAmount = 0;
     let firstName = "";
-    let lastName;
-    let contactNumber;
-    let id;
-    let email;
+    let lastName = "";
+    let contactNumber = "";
+    let email = "";
     for (const courseId of courses) {
       try {
         const enrolledCourse = await Course.findByIdAndUpdate(
@@ -235,6 +234,18 @@ const enrollStudent = async (courses, userId, res) => {
         });
       }
     }
+
+    const invoice = await Invoice.create({
+      userId: userId,
+      email: email,
+      userName: `${firstName} ${lastName}`,
+      courses: courseData,
+      contactNumber: contactNumber,
+      totalAmount: totalAmount,
+      paymentId: paymentId,
+    });
+
+    console.log("Invoice Created Successfully", invoice);
 
     let userName = `${firstName} ${lastName}`;
 

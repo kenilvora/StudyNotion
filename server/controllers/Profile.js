@@ -4,6 +4,7 @@ const Course = require("../models/Course");
 const { uploadFileToCloudinary } = require("../utils/fileUploader");
 const CourseProgress = require("../models/CourseProgress");
 const { convertSecondsToDuration } = require("../utils/secondToDuration");
+const Invoice = require("../models/Invoice");
 
 // updateProfile
 exports.updateProfile = async (req, res) => {
@@ -277,6 +278,26 @@ exports.instructorDashboard = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: courseData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// Payment History
+exports.getPaymentHistory = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const paymentHistory = await Invoice.find({
+      userId: userId,
+    }).sort({ date: -1 });
+
+    return res.status(200).json({
+      success: true,
+      data: paymentHistory,
     });
   } catch (error) {
     return res.status(500).json({

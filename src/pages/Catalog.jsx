@@ -69,7 +69,7 @@ const Catalog = () => {
         <Spinner></Spinner>
       ) : !catalogData || catalogData.length === 0 ? (
         <>
-          <div className="w-11/12 max-w-maxContent mx-auto text-4xl border-2 border-richblack-600 flex justify-center items-center py-2 rounded-lg transition-all duration-300 hover:scale-110 text-pink-100 mt-16 mb-14 gap-3">
+          <div className="w-11/12 max-w-maxContent mx-auto text-4xl border-2 border-richblack-600 text-center py-2 rounded-lg transition-all duration-300 hover:scale-110 text-pink-100 mt-16 mb-14 max-[1000px]:text-3xl max-[800px]:text-2xl max-[650px]:text-xl max-[500px]:text-lg max-[430px]:text-sm">
             No Course found for Category{" "}
             <span className="uppercase text-yellow-100">{catalogName}</span>
           </div>

@@ -28,6 +28,7 @@ import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard";
 import ManageCategories from "./components/core/Dashboard/ManageCategories";
+import PaymentHistory from "./components/core/Dashboard/PaymentHistory";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -122,6 +123,11 @@ function App() {
               ></Route>
 
               <Route path="/dashboard/cart" element={<Cart></Cart>}></Route>
+
+              <Route
+                path="/dashboard/payment-history"
+                element={<PaymentHistory></PaymentHistory>}
+              ></Route>
             </>
           )}
 

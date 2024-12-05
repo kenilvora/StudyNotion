@@ -47,4 +47,11 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "TbCategoryPlus",
   },
+  {
+    id: 8,
+    name: "Payment History",
+    path: "/dashboard/payment-history",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscHistory",
+  },
 ];
