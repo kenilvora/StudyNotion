@@ -31,8 +31,8 @@ const Cart = () => {
         </div>
       ) : paymentLoading ? (
         <div className="relative flex justify-center">
-          <Spinner></Spinner>
-          <div className="mt-8 absolute top-[52%] text-center text-3xl text-yellow-100 font-bold">
+          <Spinner height={"h-[40vh]"}></Spinner>
+          <div className="mt-8 absolute top-[53%] text-center text-3xl text-yellow-100 font-bold max-[700px]:text-xl">
             Please wait, Your payment is being Verified.
           </div>
         </div>
