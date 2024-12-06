@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./App.css";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
@@ -16,9 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Settings from "./components/core/Dashboard/Settings/Settings";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
-import { useSelector } from "react-redux";
 import Cart from "./components/core/Dashboard/Cart";
-import { ACCOUNT_TYPE } from "./utils/constants";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse/index";
 import EditCourse from "./components/core/Dashboard/EditCourse";
@@ -29,6 +28,7 @@ import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard";
 import ManageCategories from "./components/core/Dashboard/ManageCategories";
 import PaymentHistory from "./components/core/Dashboard/PaymentHistory";
+import { ACCOUNT_TYPE } from "./utils/constants";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
