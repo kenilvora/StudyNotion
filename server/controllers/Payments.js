@@ -264,7 +264,7 @@ const enrollStudent = async (courses, userId, res, paymentId) => {
         minute: "numeric",
         second: "numeric",
         hour12: true,
-        timeZone: 'Asia/Kolkata',  // Set time zone to Indian Standard Time
+        timeZone: "Asia/Kolkata", // Set time zone to Indian Standard Time
       }).format(new Date());
 
       await mailSender(
@@ -276,7 +276,8 @@ const enrollStudent = async (courses, userId, res, paymentId) => {
           contactNumber,
           courseData,
           totalAmount,
-          formattedDate
+          formattedDate,
+          paymentId
         )
       );
     } catch (error) {

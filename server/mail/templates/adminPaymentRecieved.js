@@ -4,7 +4,8 @@ exports.adminPaymentRecieved = (
   contactNumber,
   courses,
   totalAmount,
-  paymentDate
+  paymentDate,
+  paymentId
 ) => {
   return `
         <!DOCTYPE html>
@@ -71,6 +72,7 @@ exports.adminPaymentRecieved = (
                         <p><strong>Student Name:</strong> ${name}</p>
                         <p><strong>Student Email:</strong> ${email}</p>
                         <p><strong>Contact Number:</strong> ${contactNumber}</p>
+                        <p><strong>Payment ID:</strong> ${paymentId}</p>
                         <p><strong>Course(s) Enrolled:</strong></p>
                         <ul>
                            ${courses
