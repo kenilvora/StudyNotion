@@ -264,6 +264,7 @@ const enrollStudent = async (courses, userId, res, paymentId) => {
         minute: "numeric",
         second: "numeric",
         hour12: true,
+        timeZone: "UTC",
       }).format(new Date());
 
       await mailSender(
