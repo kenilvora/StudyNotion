@@ -81,7 +81,7 @@ const PaymentHistory = () => {
                 return (
                   <div
                     key={index}
-                    className="flex max-[700px]:flex-col gap-4 items-center justify-between p-4 hover:bg-richblack-800 hover:cursor-pointer"
+                    className="flex max-[700px]:flex-col gap-4 items-center justify-between p-4"
                   >
                     <div
                       className="text-richblack-50 font-bold text-lg max-[600px]:text-base 
