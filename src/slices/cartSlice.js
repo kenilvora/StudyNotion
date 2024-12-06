@@ -38,6 +38,17 @@ const cartSlice = createSlice({
       // show toast
       toast.success("Course added to cart");
     },
+    updateCartFromLocalStorage: (state) => {
+      const updatedCart = JSON.parse(localStorage.getItem("cart")) || [];
+      const updatedTotal = JSON.parse(localStorage.getItem("total")) || 0;
+      const updatedTotalItems =
+        JSON.parse(localStorage.getItem("totalItems")) || 0;
+
+      // Update state with the data from localStorage
+      state.cart = updatedCart;
+      state.total = updatedTotal;
+      state.totalItems = updatedTotalItems;
+    },
     removeFromCart: (state, action) => {
       const courseId = action.payload;
       const index = state.cart.findIndex((item) => item._id === courseId);
@@ -67,6 +78,11 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, resetItemCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  resetItemCart,
+  updateCartFromLocalStorage,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
@@ -29,9 +29,33 @@ import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard
 import ManageCategories from "./components/core/Dashboard/ManageCategories";
 import PaymentHistory from "./components/core/Dashboard/PaymentHistory";
 import { ACCOUNT_TYPE } from "./utils/constants";
+import { useEffect } from "react";
+import { updateCartFromLocalStorage } from "./slices/cartSlice";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Function to handle the 'storage' event
+    const handleStorageChange = (event) => {
+      if (
+        event.key === "cart" ||
+        event.key === "total" ||
+        event.key === "totalItems"
+      ) {
+        dispatch(updateCartFromLocalStorage());
+      }
+    };
+
+    // Attach the storage event listener
+    window.addEventListener("storage", handleStorageChange);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [dispatch]);
 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
