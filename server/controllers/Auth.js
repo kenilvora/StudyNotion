@@ -203,7 +203,7 @@ exports.login = async (req, res) => {
           res.cookie("token", token, {
             secure: true,
             sameSite: "lax",
-            maxAge: 3131536000000,
+            maxAge: 31536000000,
             domain: ".kenilvora.tech",
           });
 
