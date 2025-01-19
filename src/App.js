@@ -31,6 +31,10 @@ import PaymentHistory from "./components/core/Dashboard/PaymentHistory";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import { useEffect } from "react";
 import { updateCartFromLocalStorage } from "./slices/cartSlice";
+import TermsConditions from "./pages/TermsConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ShippingPolicy from "./pages/ShippingPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -121,6 +125,26 @@ function App() {
         <Route path="/about" element={<AboutUs></AboutUs>}></Route>
 
         <Route path="/contact" element={<ContactUs></ContactUs>}></Route>
+
+        <Route
+          path="/terms-and-conditions"
+          element={<TermsConditions></TermsConditions>}
+        ></Route>
+
+        <Route
+          path="/privacy-policy"
+          element={<PrivacyPolicy></PrivacyPolicy>}
+        ></Route>
+
+        <Route
+          path="/refund-policy"
+          element={<RefundPolicy></RefundPolicy>}
+        ></Route>
+
+        <Route
+          path="/shipping-policy"
+          element={<ShippingPolicy></ShippingPolicy>}
+        ></Route>
 
         <Route
           element={

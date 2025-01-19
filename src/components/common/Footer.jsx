@@ -20,21 +20,29 @@ const Footer = () => {
             <div className="flex gap-8 max-[595px]:justify-between ">
               {/* First Column */}
               <div className="flex flex-col gap-3">
-                <img src={logoLightImage} alt="Logo" loading="lazy"/>
+                <img src={logoLightImage} alt="Logo" loading="lazy" />
                 <FooterLinks
                   title={"Company"}
                   links={[
                     {
-                      text: "About",
+                      text: "About Us",
                       link: "/about",
                     },
                     {
-                      text: "Careers",
-                      link: "/signup",
+                      text: "Terms & Conditions",
+                      link: "/terms-and-conditions",
                     },
                     {
-                      text: "Affiliates",
-                      link: "/signup",
+                      text: "Privacy Policy",
+                      link: "/privacy-policy",
+                    },
+                    {
+                      text: "Shipping Policy",
+                      link: "/shipping-policy",
+                    },
+                    {
+                      text: "Cancellation & Refund Policy",
+                      link: "/refund-policy",
                     },
                   ]}
                 ></FooterLinks>
@@ -182,7 +190,8 @@ const Footer = () => {
           </div>
 
           <div className="text-richblack-300 text-center text-[1rem] opacity-65 font-bold ">
-            Made By <HighlightText text={"KENIL"}></HighlightText> © 2024 StudyNotion
+            Made By <HighlightText text={"KENIL"}></HighlightText> © 2024
+            StudyNotion
           </div>
         </div>
       </div>

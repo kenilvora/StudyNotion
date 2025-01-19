@@ -142,7 +142,7 @@ exports.generateInvoicePDF = async (data) => {
           </div>
           <div class="footer">
             <p>Thank you for your purchase!</p>
-            <p>Contact us at support@example.com for any inquiries.</p>
+            <p>Contact us at studynotion111@gmail.com for any inquiries.</p>
           </div>
         </div>
       </body>
