@@ -103,7 +103,12 @@ export function login(email, password, navigate) {
       }
 
       console.log("LOGIN API RESPONSE............", response);
-
+      Cookies.set("token", response.data.token, {
+        secure: true,
+        sameSite: "lax",
+        path: "/",
+        expires: 365,
+      });
       toast.success("Login Successful");
       dispatch(setToken(response.data.token));
       navigate("/dashboard/my-profile");
