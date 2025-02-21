@@ -4,6 +4,7 @@ import { apiConnector } from "../apiConnector";
 import { authEndpoints } from "../apis";
 import { setUser } from "../../slices/profileSlice";
 import { resetItemCart } from "../../slices/cartSlice";
+import Cookies from "js-cookie";
 
 const {
   SENDOTP_API,
