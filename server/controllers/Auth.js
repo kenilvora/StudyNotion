@@ -204,7 +204,7 @@ exports.login = async (req, res) => {
             secure: true,
             sameSite: "lax",
             maxAge: 31536000000,
-            path: "/"
+            path: "/",
           });
 
           res.status(200).json({
@@ -442,7 +442,7 @@ exports.logout = async (req, res) => {
     res.clearCookie("token", {
       secure: true,
       sameSite: "lax",
-      path: "/"
+      path: "/",
     });
     return res.status(200).json({
       success: true,
