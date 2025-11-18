@@ -25,7 +25,11 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://studynotion.kenilvora.tech",
+    origin: [
+      "https://studynotion.kenilvora.tech",
+      "https://learning-studynotion.vercel.app",
+      "https://studynotion.kenilvora.dev",
+    ],
   })
 );
 app.use(
