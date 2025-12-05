@@ -28,7 +28,6 @@ app.use(
     origin: [
       "https://studynotion.kenilvora.dev",
       "https://learning-studynotion.vercel.app",
-      "https://studynotion.kenilvora.dev",
     ],
   })
 );
