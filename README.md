@@ -34,9 +34,9 @@ StudyNotion is an e-learning platform designed for skill development, allowing u
 
 - **Password Hashing**: All passwords are hashed using **bcrypt**.
 - **JWT Tokens**: Stateless authentication with short expiration times.
-- **CORS Policy**: Restricted to frontend domain (`https://studynotion.kenilvora.tech`).
+- **CORS Policy**: Restricted to frontend domain (`https://studynotion.kenilvora.dev`).
 - **Environment Variables**: Sensitive data managed securely with `dotenv`.
 
 ## **Deployment**
 
-- **Frontend**: Deployed on https://studynotion.kenilvora.tech.
+- **Frontend**: Deployed on https://studynotion.kenilvora.dev.
