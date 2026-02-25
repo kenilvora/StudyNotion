@@ -205,6 +205,7 @@ exports.login = async (req, res) => {
             sameSite: "lax",
             maxAge: 31536000000,
             path: "/",
+            httpOnly: true
           });
 
           res.status(200).json({
