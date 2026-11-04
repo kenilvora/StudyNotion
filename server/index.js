@@ -26,8 +26,7 @@ app.use(
   cors({
     credentials: true,
     origin: [
-      "https://studynotion.kenilvora.dev",
-      "https://learning-studynotion.vercel.app",
+      "https://studynotion-kenil.vercel.app/"
     ],
   })
 );
